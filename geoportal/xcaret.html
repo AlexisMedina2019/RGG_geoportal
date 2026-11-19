@@ -31,37 +31,38 @@
 <body>
 <div class="app">
   <aside>
-    <div class="brand"><a class="back" href="index.html">← Todos los sitios</a><img src="img/rgg_logo.png" alt="Reef Geoscience Group"></div>
+    <div class="brand"><a class="back" href="index.html">← <span data-l="es">Todos los sitios</span><span data-l="en">All sites</span></a><img src="img/rgg_logo.png" alt="Reef Geoscience Group"></div>
     <h1 class="site">Xcaret, Quintana Roo</h1>
-    <p class="sub">Arrecife del último interglaciar (MIS 5e) · secciones verticales y edades U-Th</p>
-    <div class="draft">Coordenadas reconstruidas a partir de figuras publicadas; no son posiciones de GPS. Ver Notas.</div>
+    <p data-l="es" class="sub">Arrecife del último interglaciar (MIS 5e) · secciones verticales y edades U-Th</p><p data-l="en" class="sub">Last Interglacial reef (MIS 5e) · vertical sections and U-Th ages</p>
+    <div data-l="es" class="draft">Coordenadas reconstruidas a partir de figuras publicadas; no son posiciones de GPS. Ver Notas.</div><div data-l="en" class="draft">Coordinates reconstructed from published figures; they are not GPS positions. See Notes.</div>
 
-    <h2>Secciones visibles</h2>
-    <div><b id="count">–</b> de <span id="total">–</span></div>
-    <label style="margin-top:6px"><input type="checkbox" id="soloF"> Solo secciones fechadas</label>
-    <label><input type="checkbox" id="trOn" checked> Mostrar transectos XA-B, XC y XD-E</label>
-    <label><input type="checkbox" id="altOn"> Posición según la Fig. 5 cuando discrepa más de 10 m</label>
+    <h2 data-l="es">Secciones visibles</h2><h2 data-l="en">Visible sections</h2>
+    <div><b id="count">–</b> <span data-l="es">de</span><span data-l="en">of</span> <span id="total">–</span></div>
+    <label style="margin-top:6px"><input type="checkbox" id="soloF"> <span data-l="es">Solo secciones fechadas</span><span data-l="en">Dated sections only</span></label>
+    <label><input type="checkbox" id="trOn" checked> <span data-l="es">Mostrar transectos XA-B, XC y XD-E</span><span data-l="en">Show transects XA-B, XC and XD-E</span></label>
+    <label><input type="checkbox" id="altOn"> <span data-l="es">Posición según la Fig. 5 cuando discrepa más de 10 m</span><span data-l="en">Position according to Fig. 5 where it differs by more than 10 m</span></label>
 
-    <h2>Edad U-Th (mediana de las confiables, ka)</h2>
+    <h2 data-l="es">Edad U-Th (mediana de las confiables, ka)</h2><h2 data-l="en">U-Th age (median of reliable ages, ka)</h2>
     <div class="bar" style="background:linear-gradient(to right,#440154,#3e4989,#26828e,#35b779,#b5de2b,#fde725)"></div>
     <div class="ticks"><span>115</span><span>120</span><span>125</span><span>130</span><span>135</span></div>
-    <p class="ref" style="margin-top:6px">● gris oscuro: fechada, sin edades confiables · ○ gris claro: sin fechar.</p>
+    <p data-l="es" class="ref" style="margin-top:6px">● gris oscuro: fechada, sin edades confiables · ○ gris claro: sin fechar.</p><p data-l="en" class="ref" style="margin-top:6px">● dark grey: dated, no reliable ages · ○ light grey: undated.</p>
 
-    <h2>Notas</h2>
-    <p class="ref"><b>Elevación</b>: altura sobre el nivel medio del mar actual, medida en cada sección con un datum de nivel del mar; error ±15 cm (Blanchon 2010). Son afloramientos emergidos, así que no se usa la batimetría.</p>
-    <p class="ref"><b>Edades</b>: <sup>230</sup>Th/U, error 2σ (Blanchon et al. 2009; tabla original de A. Eisenhauer). «Confiable (r)» y «no confiable (u)» son la clasificación de los autores; las confiables tienen δ<sup>234</sup>U inicial de 143–156 ‰, cercano al del agua de mar. En gris se muestran las no confiables o sin clasificar. Las edades están referidas al año del análisis; restar ~0.06 ka para pasarlas a BP (1950).</p>
-    <p class="ref"><b>Coordenadas</b>: se tomaron del mapa de paradas de campo del grupo (sobre imagen satelital), registrado con la imagen Esri actual mediante 75 puntos homólogos (similitud; RMS 1.6 m; validación cruzada 1.7 m; 2–4 m al extrapolar tierra adentro). Las secciones se compararon con la Fig. 5 de Blanchon (2010): en 24 de 31 la diferencia es menor de 3 m (mediana 1.1 m). La guía de campo de Xcaret (P. Blanchon) confirma que los círculos numerados son los afloramientos visitados en cada parada y que las líneas gruesas son solo las líneas de proyección de los cortes. Se asigna ±10 m por el dibujo de los símbolos. <b>XA4</b> (fechada) difiere 93 m entre las dos figuras; XD3, 44 m, y XD6, 19 m: están marcadas y su posición alternativa puede activarse arriba.</p>
-    <p class="ref"><b>Sección vertical</b>: el botón del popup abre el panel correspondiente de la Fig. 6 de Blanchon (2010), con la columna resaltada y las muestras fechadas a su elevación (escala calibrada, 1 px ≈ 2 cm). El panel D-E rotula dos secciones como «E3»; la del extremo costero probablemente es D3 (aquí, E3*).</p>
+    <h2 data-l="es">Notas</h2><h2 data-l="en">Notes</h2>
+    <p data-l="es" class="ref"><b>Elevación</b>: altura sobre el nivel medio del mar actual, medida en cada sección con un datum de nivel del mar; error ±15 cm (Blanchon 2010). Son afloramientos emergidos, así que no se usa la batimetría.</p><p data-l="en" class="ref"><b>Elevation</b>: height above present mean sea level, measured at each section using a sea-level datum; error ±15 cm (Blanchon 2010). These are emergent outcrops, so bathymetry is not used.</p>
+    <p data-l="es" class="ref"><b>Edades</b>: <sup>230</sup>Th/U, error 2σ (Blanchon et al. 2009; tabla original de A. Eisenhauer). «Confiable (r)» y «no confiable (u)» son la clasificación de los autores; las confiables tienen δ<sup>234</sup>U inicial de 143–156 ‰, cercano al del agua de mar. En gris se muestran las no confiables o sin clasificar. Las edades están referidas al año del análisis; restar ~0.06 ka para pasarlas a BP (1950).</p><p data-l="en" class="ref"><b>Ages</b>: <sup>230</sup>Th/U, 2σ error (Blanchon et al. 2009; original table by A. Eisenhauer). "Reliable (r)" and "unreliable (u)" are the authors' classification; reliable ages have initial δ<sup>234</sup>U of 143–156 ‰, close to seawater. Unreliable or unclassified ages are shown in grey. Ages are referenced to the year of analysis; subtract ~0.06 ka to convert to BP (1950).</p>
+    <p data-l="es" class="ref"><b>Coordenadas</b>: se tomaron del mapa de paradas de campo del grupo (sobre imagen satelital), registrado con la imagen Esri actual mediante 75 puntos homólogos (similitud; RMS 1.6 m; validación cruzada 1.7 m; 2–4 m al extrapolar tierra adentro). Las secciones se compararon con la Fig. 5 de Blanchon (2010): en 24 de 31 la diferencia es menor de 3 m (mediana 1.1 m). La guía de campo de Xcaret (P. Blanchon) confirma que los círculos numerados son los afloramientos visitados en cada parada y que las líneas gruesas son solo las líneas de proyección de los cortes. Se asigna ±10 m por el dibujo de los símbolos. <b>XA4</b> (fechada) difiere 93 m entre las dos figuras; XD3, 44 m, y XD6, 19 m: están marcadas y su posición alternativa puede activarse arriba.</p><p data-l="en" class="ref"><b>Coordinates</b>: taken from the group's field-stop map (drawn on satellite imagery), registered to current Esri imagery with 75 tie points (similarity transform; RMS 1.6 m; cross-validation 1.7 m; 2–4 m when extrapolating inland). Sections were compared with Fig. 5 of Blanchon (2010): in 24 of 31 the difference is under 3 m (median 1.1 m). The Xcaret field guide (P. Blanchon) confirms that the numbered circles are the outcrops visited at each stop and that the thick lines are only the projection lines of the strike sections. An uncertainty of ±10 m is assigned for symbol drafting. <b>XA4</b> (dated) differs by 93 m between the two figures; XD3 by 44 m and XD6 by 19 m: they are flagged and their alternative position can be switched on above.</p>
+    <p data-l="es" class="ref"><b>Sección vertical</b>: el botón del popup abre el panel correspondiente de la Fig. 6 de Blanchon (2010), con la columna resaltada y las muestras fechadas a su elevación (escala calibrada, 1 px ≈ 2 cm). El panel D-E rotula dos secciones como «E3»; la del extremo costero probablemente es D3 (aquí, E3*).</p><p data-l="en" class="ref"><b>Vertical section</b>: the popup button opens the corresponding panel of Fig. 6 of Blanchon (2010), with the column highlighted and the dated samples at their elevation (calibrated scale, 1 px ≈ 2 cm). Panel D-E labels two sections "E3"; the one at the seaward end is probably D3 (here, E3*).</p>
 
-    <h2>Referencias</h2>
+    <h2 data-l="es">Referencias</h2><h2 data-l="en">References</h2>
     <p class="ref">Blanchon P. (2010). Reef demise and back-stepping during the last interglacial, northeast Yucatan. <i>Coral Reefs</i> 29:481–498. <a href="https://doi.org/10.1007/s00338-010-0599-0">doi:10.1007/s00338-010-0599-0</a></p>
     <p class="ref">Blanchon P., Eisenhauer A., Fietzke J., Liebetrau V. (2009). Rapid sea-level rise and reef back-stepping at the close of the last interglacial highstand. <i>Nature</i> 458:881–884. <a href="https://doi.org/10.1038/nature07933">doi:10.1038/nature07933</a></p>
-    <p class="ref"><a href="data/xcaret.geojson">Descargar datos (GeoJSON)</a></p>
+    <p class="ref"><a href="data/xcaret.geojson"><span data-l="es">Descargar datos (GeoJSON)</span><span data-l="en">Download data (GeoJSON)</span></a></p>
   </aside>
   <div id="map"></div>
 </div>
 <script>
 const D = GEO.xcaret, F6 = GEO.xcaretFig6;
+document.title = "Xcaret · " + GP.t("Geoportal EPM","EPM Geoportal");
 const PANEL = { AB:"XA-B", C:"XC", DE:"XD-E" };
 const map = GP.map("map", null, null, GEO.xcaretBase);
 const grp = L.layerGroup().addTo(map), alt = L.layerGroup();
@@ -72,17 +73,17 @@ function color(p){ return p.edad_med_conf!==null ? GP.viridis(p.edad_med_conf,11
 function popup(p){
   const f=GP.fmt, e=GP.esc;
   let h = '<div class="pop-title">' + e(p.seccion_pub) + (p.etiqueta_fig6 ? ' <span style="font-weight:400;color:#5d6b7a">(Fig. 6: ' + e(p.etiqueta_fig6) + ')</span>' : '') + '</div><table class="pop">' +
-    '<tr><td>Transecto</td><td>' + e(p.transecto) + '</td></tr>' +
-    '<tr><td>Posición</td><td>± ' + f(p.incert_pos_m,0) + ' m · calidad ' + e(p.coord_calidad) + '</td></tr>' +
-    (p.n_conf ? '<tr><td>Edad (confiables)</td><td><b>' + f(p.edad_min_conf,1) + (p.n_conf>1 ? '–' + f(p.edad_max_conf,1) : '') + ' ka</b> (n = ' + p.n_conf + ')</td></tr>' : '') +
+    '<tr><td>' + GP.t('Transecto','Transect') + '</td><td>' + e(p.transecto) + '</td></tr>' +
+    '<tr><td>' + GP.t('Posición','Position') + '</td><td>± ' + f(p.incert_pos_m,0) + ' m · ' + GP.t('calidad ','quality ') + e(GP.tv(p.coord_calidad)) + '</td></tr>' +
+    (p.n_conf ? '<tr><td>' + GP.t('Edad (confiables)','Age (reliable)') + '</td><td><b>' + f(p.edad_min_conf,1) + (p.n_conf>1 ? '–' + f(p.edad_max_conf,1) : '') + ' ka</b> (n = ' + p.n_conf + ')</td></tr>' : '') +
     '</table>';
-  if (p.dif_fig5_m!==null && p.dif_fig5_m>=10) h += '<div class="warn">La Fig. 5 de Blanchon (2010) sitúa esta sección ' + f(p.dif_fig5_m,0) + ' m más lejos. Pendiente de confirmar con P. Blanchon.</div>';
+  if (p.dif_fig5_m!==null && p.dif_fig5_m>=10) h += '<div class="warn">' + GP.t('La Fig. 5 de Blanchon (2010) sitúa esta sección ' + f(p.dif_fig5_m,0) + ' m más lejos. Pendiente de confirmar con P. Blanchon.','Fig. 5 of Blanchon (2010) places this section ' + f(p.dif_fig5_m,0) + ' m away. To be confirmed with P. Blanchon.') + '</div>';
   if (p.edades && p.edades.length) {
-    h += '<table class="ages"><tr><th>Muestra</th><th>Elev. (m)</th><th>Edad ± 2σ (ka)</th><th>δ²³⁴Uᵢ</th><th></th></tr>' +
-      p.edades.map(a => '<tr class="' + (isU(a)?'u':'') + '"><td>' + e(a.muestra) + ' <span title="especie">' + e(a.especie_cod) + '</span></td><td>+' + f(a.elev_m,1) + '</td><td>' + f(a.edad_ka,1) + ' ± ' + f(a.err_ka,1) + '</td><td>' + f(a.d234U_ini,0) + '</td><td>' + (a.fiabilidad==='confiable (r)'?'r':(a.fiabilidad==='sin dato'?'–':'u')) + (a.nota_fiab?' ('+e(a.nota_fiab)+')':'') + '</td></tr>').join('') + '</table>';
-  } else h += '<div class="nolog">Sin edades U-Th.</div>';
-  if (p.panel_fig6) h += '<div class="logbtn" data-sec="' + e(p.seccion) + '"><img src="' + F6[p.panel_fig6].src + '" alt="" style="height:40px"><span>Ver sección vertical ' + PANEL[p.panel_fig6] + ' (Fig. 6) →</span></div>';
-  else h += '<div class="nolog">Esta sección no aparece en la Fig. 6.</div>';
+    h += '<table class="ages"><tr><th>' + GP.t('Muestra','Sample') + '</th><th>Elev. (m)</th><th>' + GP.t('Edad','Age') + ' ± 2σ (ka)</th><th>δ²³⁴Uᵢ</th><th></th></tr>' +
+      p.edades.map(a => '<tr class="' + (isU(a)?'u':'') + '"><td>' + e(a.muestra) + ' <span title="' + GP.t('especie','species') + '">' + e(a.especie_cod) + '</span></td><td>+' + f(a.elev_m,1) + '</td><td>' + f(a.edad_ka,1) + ' ± ' + f(a.err_ka,1) + '</td><td>' + f(a.d234U_ini,0) + '</td><td>' + (a.fiabilidad==='confiable (r)'?'r':(a.fiabilidad==='sin dato'?'–':'u')) + (a.nota_fiab?' ('+e(GP.tv(a.nota_fiab))+')':'') + '</td></tr>').join('') + '</table>';
+  } else h += '<div class="nolog">' + GP.t('Sin edades U-Th.','No U-Th ages.') + '</div>';
+  if (p.panel_fig6) h += '<div class="logbtn" data-sec="' + e(p.seccion) + '"><img src="' + F6[p.panel_fig6].src + '" alt="" style="height:40px"><span>' + GP.t('Ver sección vertical ','View vertical section ') + PANEL[p.panel_fig6] + ' (Fig. 6) →</span></div>';
+  else h += '<div class="nolog">' + GP.t('Esta sección no aparece en la Fig. 6.','This section is not shown in Fig. 6.') + '</div>';
   return h;
 }
 
@@ -91,15 +92,15 @@ function openPanel(p){
   let lb = document.getElementById("lbx");
   if (!lb) {
     lb = document.createElement("div"); lb.id="lbx"; lb.className="lb lbx";
-    lb.innerHTML = '<div class="box"><button class="close" aria-label="Cerrar">×</button><div class="ttl" style="font-weight:600;margin:0 24px 6px 0"></div><div class="imgwrap"><div class="pnl"><img alt="Sección vertical"></div></div><div class="cap" style="max-width:760px"></div></div>';
+    lb.innerHTML = '<div class="box"><button class="close" aria-label="Close">×</button><div class="ttl" style="font-weight:600;margin:0 24px 6px 0"></div><div class="imgwrap"><div class="pnl"><img alt="Fig. 6"></div></div><div class="cap" style="max-width:760px"></div></div>';
     document.body.appendChild(lb);
     lb.addEventListener("click", ev => { if (ev.target===lb || ev.target.classList.contains("close")) lb.classList.remove("on"); });
     document.addEventListener("keydown", ev => { if (ev.key==="Escape") lb.classList.remove("on"); });
   }
   const wrap = lb.querySelector(".imgwrap"), pnl = lb.querySelector(".pnl"), img = pnl.querySelector("img");
   pnl.querySelectorAll(".band6,.dot6").forEach(n=>n.remove());
-  lb.querySelector(".ttl").textContent = "Sección " + p.seccion_pub + " en el transecto " + PANEL[p.panel_fig6] + " · Xcaret";
-  lb.querySelector(".cap").innerHTML = "Panel " + PANEL[p.panel_fig6] + " de la Fig. 6 de Blanchon (2010), rotado para que la elevación quede en vertical (escala a la derecha, en m sobre el nivel del mar actual; mar a la derecha). La banda azul marca la columna " + GP.esc(p.etiqueta_fig6) + ". Puntos: muestras fechadas a su elevación (rojo, confiables, con su edad; gris, no confiables: pasa el cursor para ver la edad). Edades de Blanchon et al. (2009). Clic en la imagen para ampliarla o reducirla.";
+  lb.querySelector(".ttl").textContent = GP.t("Sección ","Section ") + p.seccion_pub + GP.t(" en el transecto "," on transect ") + PANEL[p.panel_fig6] + " · Xcaret";
+  lb.querySelector(".cap").innerHTML = GP.t("Panel " + PANEL[p.panel_fig6] + " de la Fig. 6 de Blanchon (2010), rotado para que la elevación quede en vertical (escala a la derecha, en m sobre el nivel del mar actual; mar a la derecha). La banda azul marca la columna " + GP.esc(p.etiqueta_fig6) + ". Puntos: muestras fechadas a su elevación (rojo, confiables, con su edad; gris, no confiables: pasa el cursor para ver la edad). Edades de Blanchon et al. (2009). Clic en la imagen para ampliarla o reducirla.", "Panel " + PANEL[p.panel_fig6] + " of Fig. 6 of Blanchon (2010), rotated so that elevation is vertical (scale on the right, in m above present sea level; sea to the right). The blue band marks column " + GP.esc(p.etiqueta_fig6) + ". Dots: dated samples at their elevation (red, reliable, with their age; grey, unreliable: hover to see the age). Ages from Blanchon et al. (2009). Click the image to zoom in or out.");
   wrap.classList.remove("z");
   img.onclick = () => { wrap.classList.toggle("z"); img.onload(); };
   img.onload = () => {
@@ -113,7 +114,7 @@ function openPanel(p){
       d.style.left = x+"px"; d.style.top = (c.sl - a.elev_m * c.pxm) * k + "px";
       if (n===1) { const grpA = p.edades.filter(q => q.elev_m===a.elev_m && isU(q)===isU(a));
         const txt = grpA.map(q=>GP.fmt(q.edad_ka,1)).join(" · ") + " ka";
-        if (isU(a)) d.title = "No confiables (+" + GP.fmt(a.elev_m,1) + " m): " + txt; else d.innerHTML = "<span>" + txt + "</span>";
+        if (isU(a)) d.title = GP.t("No confiables (+","Unreliable (+") + GP.fmt(a.elev_m,1) + " m): " + txt; else d.innerHTML = "<span>" + txt + "</span>";
         pnl.appendChild(d); }
     });
     wrap.scrollLeft = Math.max(0, x - wrap.clientWidth/2);
@@ -134,13 +135,13 @@ const markers = D.features.map(f => {
   if (p.lon_fig5!==null && p.dif_fig5_m>=10) {
     L.polyline([[lat,lon],[p.lat_fig5,p.lon_fig5]], { color:"#fff", weight:1.5, dashArray:"4 4" }).addTo(alt);
     L.marker([p.lat_fig5,p.lon_fig5], { icon:GP.svgIcon("circle","transparent",14) })
-      .bindTooltip(GP.esc(p.seccion_pub) + " según Fig. 5 (" + GP.fmt(p.dif_fig5_m,0) + " m)", { direction:"top" }).addTo(alt);
+      .bindTooltip(GP.esc(p.seccion_pub) + GP.t(" según Fig. 5 ("," according to Fig. 5 (") + GP.fmt(p.dif_fig5_m,0) + " m)", { direction:"top" }).addTo(alt);
   }
   m._p=p; return m;
 });
 const tr = L.layerGroup().addTo(map);
 GEO.xcaretTransectos.features.forEach(f => L.polyline(f.geometry.coordinates.map(c=>[c[1],c[0]]), { color:"#ffffff", weight:2, opacity:.85 })
-  .bindTooltip("Transecto " + f.properties.transecto, { sticky:true }).addTo(tr));
+  .bindTooltip(GP.t("Transecto ","Transect ") + f.properties.transecto, { sticky:true }).addTo(tr));
 document.getElementById("trOn").addEventListener("change", e => e.target.checked ? tr.addTo(map) : map.removeLayer(tr));
 document.getElementById("altOn").addEventListener("change", e => e.target.checked ? alt.addTo(map) : map.removeLayer(alt));
 document.getElementById("total").textContent = markers.length;
