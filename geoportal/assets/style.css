@@ -81,3 +81,14 @@ html.embed #map { height:100vh; }
 .embar > * { pointer-events:auto; font:600 12px "Segoe UI",system-ui,sans-serif; background:#fff; color:var(--deep); border:1px solid #b9c6d0; border-radius:5px; padding:6px 10px; box-shadow:0 1px 4px rgba(0,0,0,.2); cursor:pointer; text-decoration:none; }
 html.embed aside.open ~ .embar .eb-info { background:var(--deep); color:#fff; }
 html.embed aside.open ~ .embar { left:calc(min(320px,88%) + 10px); }
+
+/* ---------- Idioma / Language ---------- */
+html[data-lang="en"] [data-l="es"], html[data-lang="es"] [data-l="en"] { display:none !important; }
+.langsw { display:inline-flex; border:1px solid #b9c6d0; border-radius:5px; overflow:hidden; background:#fff; flex:none; }
+.langsw button { font:600 11.5px "Segoe UI",system-ui,sans-serif; border:0; background:#fff; color:var(--deep); padding:4px 8px; cursor:pointer; }
+.langsw button + button { border-left:1px solid #b9c6d0; }
+.langsw button.on { background:var(--deep); color:#fff; cursor:default; }
+.brand .langsw { margin-left:auto; margin-right:10px; }
+.hero { position:relative; }
+.hero > .langsw { position:absolute; top:14px; right:18px; z-index:5; }
+.embar .langsw { pointer-events:auto; padding:0; box-shadow:0 1px 4px rgba(0,0,0,.2); }

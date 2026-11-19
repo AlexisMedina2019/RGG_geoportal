@@ -14,38 +14,39 @@
 <body>
 <div class="app">
   <aside>
-    <div class="brand"><a class="back" href="index.html">← Todos los sitios</a><img src="img/rgg_logo.png" alt="Reef Geoscience Group"></div>
+    <div class="brand"><a class="back" href="index.html">← <span data-l="es">Todos los sitios</span><span data-l="en">All sites</span></a><img src="img/rgg_logo.png" alt="Reef Geoscience Group"></div>
     <h1 class="site">Mahahual, Quintana Roo</h1>
-    <p class="sub">Núcleos perforados en 2021–2022 · muestras superficiales 2025–2026</p>
-    <div class="draft">Proyecto en curso: las muestras aún no están fechadas (fechamiento U-Th pendiente).</div>
+    <p data-l="es" class="sub">Núcleos perforados en 2021–2022 · muestras superficiales 2025–2026</p><p data-l="en" class="sub">Cores drilled in 2021–2022 · surface samples 2025–2026</p>
+    <div data-l="es" class="draft">Proyecto en curso: las muestras aún no están fechadas (fechamiento U-Th pendiente).</div><div data-l="en" class="draft">Ongoing project: the samples are not yet dated (U-Th dating pending).</div>
 
-    <h2>Puntos visibles</h2>
-    <div><b id="count">–</b> de <span id="total">–</span></div>
+    <h2 data-l="es">Puntos visibles</h2><h2 data-l="en">Visible points</h2>
+    <div><b id="count">–</b> <span data-l="es">de</span><span data-l="en">of</span> <span id="total">–</span></div>
 
-    <h2>Tipo</h2><div id="tipoF"></div>
-    <label style="margin-top:6px"><input type="checkbox" id="trOn" checked> Mostrar transectos T1 y T2</label>
+    <h2 data-l="es">Tipo</h2><h2 data-l="en">Type</h2><div id="tipoF"></div>
+    <label style="margin-top:6px"><input type="checkbox" id="trOn" checked> <span data-l="es">Mostrar transectos T1 y T2</span><span data-l="en">Show transects T1 and T2</span></label>
 
-    <h2>Profundidad SDB (m, NMM)</h2>
-    <label><input type="checkbox" id="batOn" checked> Batimetría satelital CONABIO</label>
+    <h2 data-l="es">Profundidad SDB (m, NMM)</h2><h2 data-l="en">SDB depth (m, MSL)</h2>
+    <label><input type="checkbox" id="batOn" checked> <span data-l="es">Batimetría satelital CONABIO</span><span data-l="en">CONABIO satellite bathymetry</span></label>
     <div class="bar" style="background:linear-gradient(to right,#081d58,#08306b,#2171b5,#6baed6,#c6dbef,#f7fbff)"></div>
     <div class="ticks"><span>−20</span><span>−12</span><span>−8</span><span>−4</span><span>−2</span><span>0</span></div>
-    <div class="row" style="margin-top:6px">Opacidad <input type="range" id="batOp" min="0" max="1" step="0.05" value="0.55" style="flex:1"></div>
+    <div class="row" style="margin-top:6px"><span data-l="es">Opacidad</span><span data-l="en">Opacity</span> <input type="range" id="batOp" min="0" max="1" step="0.05" value="0.55" style="flex:1"></div>
 
-    <h2>Notas</h2>
-    <p class="ref">■ Núcleos (C): en el popup, el botón del log abre el escaneo del núcleo y su log de composición, con escala (Islas-Domínguez 2023).</p>
-    <p class="ref">● Muestras superficiales (S), en los transectos T1 y T2.</p>
-    <p class="ref">Profundidad de los núcleos: la profundidad del agua al perforar (WD) y la profundidad total (TD) provienen de Islas-Domínguez (2023). WD es en promedio 1.6 ± 0.8 m más profunda que la batimetría satelital (r = 0.97). La explicación más probable es que los núcleos se perforaron en puntos bajos del sustrato (surcos), cuyo relieve promedia la batimetría de 4 m; también influyen la marea, que no se corrigió en WD, y el error propio del producto.</p>
-    <p class="ref">Coordenadas del GPS de campo (incertidumbre ~5 m). Profundidad: batimetría satelital de CONABIO (4 m, nivel medio del mar). σ combina el error del producto (0.5 m hasta 8 m; 2 m entre 8 y 20 m) con la variabilidad del fondo en un radio de 5 m. Comprobación: en MHA_T1_S10 la nota de campo dice 10 m y la batimetría da −10.5 ± 2.0 m.</p>
+    <h2 data-l="es">Notas</h2><h2 data-l="en">Notes</h2>
+    <p data-l="es" class="ref">■ Núcleos (C): en el popup, el botón del log abre el escaneo del núcleo y su log de composición, con escala (Islas-Domínguez 2023).</p><p data-l="en" class="ref">■ Cores (C): in the popup, the log button opens the core scan and its composition log, with scale (Islas-Domínguez 2023).</p>
+    <p data-l="es" class="ref">● Muestras superficiales (S), en los transectos T1 y T2.</p><p data-l="en" class="ref">● Surface samples (S), along transects T1 and T2.</p>
+    <p data-l="es" class="ref">Profundidad de los núcleos: la profundidad del agua al perforar (WD) y la profundidad total (TD) provienen de Islas-Domínguez (2023). WD es en promedio 1.6 ± 0.8 m más profunda que la batimetría satelital (r = 0.97). La explicación más probable es que los núcleos se perforaron en puntos bajos del sustrato (surcos), cuyo relieve promedia la batimetría de 4 m; también influyen la marea, que no se corrigió en WD, y el error propio del producto.</p><p data-l="en" class="ref">Core depths: the water depth at drilling (WD) and total depth (TD) come from Islas-Domínguez (2023). WD is on average 1.6 ± 0.8 m deeper than the satellite bathymetry (r = 0.97). The most likely explanation is that the cores were drilled in low points of the substrate (grooves), whose relief is averaged out by the 4 m bathymetry; the tide, not corrected in WD, and the product's own error also contribute.</p>
+    <p data-l="es" class="ref">Coordenadas del GPS de campo (incertidumbre ~5 m). Profundidad: batimetría satelital de CONABIO (4 m, nivel medio del mar). σ combina el error del producto (0.5 m hasta 8 m; 2 m entre 8 y 20 m) con la variabilidad del fondo en un radio de 5 m. Comprobación: en MHA_T1_S10 la nota de campo dice 10 m y la batimetría da −10.5 ± 2.0 m.</p><p data-l="en" class="ref">Coordinates from field GPS (uncertainty ~5 m). Depth: CONABIO satellite bathymetry (4 m, mean sea level). σ combines the product error (0.5 m down to 8 m; 2 m between 8 and 20 m) with the variability of the seabed within a 5 m radius. Check: at MHA_T1_S10 the field note says 10 m and the bathymetry gives −10.5 ± 2.0 m.</p>
 
-    <h2>Referencias</h2>
+    <h2 data-l="es">Referencias</h2><h2 data-l="en">References</h2>
     <p class="ref">Cerdeira-Estrada S. et al. (2018). Batimetría de los Ecosistemas Marinos del Caribe Mexicano: Cabo Catoche – Xcalak, ed. 2. CONABIO. <a href="http://creativecommons.org/licenses/by-nc/2.5/mx/">CC BY-NC 2.5 MX</a></p>
-    <p class="ref">Islas-Domínguez E.G. (2023). <i>Zonation, structure and geological development of a fringing reef at Mahahual</i>. Tesis de Maestría, Posgrado en Ciencias del Mar y Limnología, UNAM.</p>
-    <p class="ref"><a href="data/mahahual.geojson">Descargar datos (GeoJSON)</a></p>
+    <p class="ref">Islas-Domínguez E.G. (2023). <i>Zonation, structure and geological development of a fringing reef at Mahahual</i>. <span data-l="es">Tesis de Maestría</span><span data-l="en">MSc thesis</span>, Posgrado en Ciencias del Mar y Limnología, UNAM.</p>
+    <p class="ref"><a href="data/mahahual.geojson"><span data-l="es">Descargar datos (GeoJSON)</span><span data-l="en">Download data (GeoJSON)</span></a></p>
   </aside>
   <div id="map"></div>
 </div>
 <script>
 const D = GEO.mahahual;
+document.title = "Mahahual · " + GP.t("Geoportal EPM","EPM Geoportal");
 /* Logs de perforación de Mahahual (tesis del grupo).
    Para integrar un núcleo: guardar la imagen en logs/MHA_<punto>.jpg y añadir una entrada:
    "MHA_1A": { src:"logs/MHA_1A.jpg", wd:<prof. del tope en m>, y0:<px del 0 cm>, pxcm:<px por cm>, title:"…", caption:"…" }  */
@@ -56,8 +57,8 @@ const TESIS = {MHA_1A:"M1a",MHA_1B:"M1b",MHA_2:"M2",MHA_3A:"M3a",MHA_3B:"M3b",MH
    y0 = píxel de 0.0 m; pxcm = píxeles por cm. Verificada: la longitud de cada escala coincide con TD − WD. */
 const CAL = {"MHA_1A": {"y0": 144.1, "pxcm": 6.634}, "MHA_1B": {"y0": 348.7, "pxcm": 6.649}, "MHA_2": {"y0": 141.0, "pxcm": 6.634}, "MHA_3A": {"y0": 137.2, "pxcm": 6.634}, "MHA_3B": {"y0": 167.9, "pxcm": 6.448}, "MHA_4": {"y0": 160.2, "pxcm": 6.634}, "MHA_5A": {"y0": 138.8, "pxcm": 6.448}, "MHA_5B": {"y0": 153.4, "pxcm": 5.487}, "MHA_6": {"y0": 146.2, "pxcm": 4.402}, "MHA_7A": {"y0": 146.8, "pxcm": 6.448}, "MHA_7B": {"y0": 144.4, "pxcm": 6.433}, "MHA_8A": {"y0": 163.9, "pxcm": 6.634}, "MHA_8B": {"y0": 145.6, "pxcm": 6.433}};
 Object.keys(TESIS).forEach(k => LOGS[k] = { src:"logs/"+k+".jpg", wd:WD_MHA[k], y0:CAL[k].y0, pxcm:CAL[k].pxcm,
-  title:"Núcleo "+TESIS[k]+" ("+k+") · Mahahual",
-  caption:"A: escaneo del núcleo (escala en cm). B: log de composición (escala en m bajo la interfaz agua/sustrato), con WD (profundidad del agua en el tope) y TD (profundidad total). Cuando haya edades, su posición se marcará en rojo sobre el log B. Fuente: Islas-Domínguez E.G. (2023), <i>Zonation, structure and geological development of a fringing reef at Mahahual</i>, tesis de Maestría, PCML-UNAM; archivo de trabajo «Sampling 4 dating Mahahual», Reef Geoscience Group." });
+  title:GP.t("Núcleo ","Core ")+TESIS[k]+" ("+k+") · Mahahual",
+  caption:GP.t("A: escaneo del núcleo (escala en cm). B: log de composición (escala en m bajo la interfaz agua/sustrato), con WD (profundidad del agua en el tope) y TD (profundidad total). Cuando haya edades, su posición se marcará en rojo sobre el log B. Fuente: ","A: core scan (scale in cm). B: composition log (scale in m below the water/substrate interface), with WD (water depth at the core top) and TD (total depth). Once ages are available, their position will be marked in red on log B. Source: ")+"Islas-Domínguez E.G. (2023), <i>Zonation, structure and geological development of a fringing reef at Mahahual</i>, "+GP.t("tesis de Maestría","MSc thesis")+", PCML-UNAM; "+GP.t("archivo de trabajo","working file")+" «Sampling 4 dating Mahahual», Reef Geoscience Group." });
 /* Profundidad del tope (WD) de cada núcleo, de Islas-Domínguez (2023), Fig. 17: se usa para la escala del log */
 
 const STY = { "núcleo (C)":{shape:"sq",fill:"#f2a922",size:16}, "muestra superficial (S)":{shape:"circle",fill:"#ffffff",size:14}, "observación":{shape:"dia",fill:"#9aa5b1",size:14} };
@@ -67,21 +68,21 @@ const grp = L.layerGroup().addTo(map);
 function popup(p){
   const f=GP.fmt, e=GP.esc;
   let h = '<div class="pop-title">' + e(p.punto) + '</div><table class="pop">' +
-    '<tr><td>Tipo</td><td>' + e(p.tipo) + (p.transecto ? ' · transecto ' + e(p.transecto) : '') + '</td></tr>' +
-    '<tr><td>Campaña</td><td>' + e(p.campania) + '</td></tr>' +
-    (p.estado ? '<tr><td>Estado</td><td>' + e(p.estado) + '</td></tr>' : '') +
-    (p.nota_campo ? '<tr><td>Nota de campo</td><td>' + e(p.nota_campo) + '</td></tr>' : '') +
-    '<tr><td>Prof. fondo (SDB)</td><td>' + GP.depth(p) + '</td></tr>' +
+    '<tr><td>' + GP.t('Tipo','Type') + '</td><td>' + e(GP.tv(p.tipo)) + (p.transecto ? GP.t(' · transecto ',' · transect ') + e(p.transecto) : '') + '</td></tr>' +
+    '<tr><td>' + GP.t('Campaña','Campaign') + '</td><td>' + e(GP.tv(p.campania)) + '</td></tr>' +
+    (p.estado ? '<tr><td>' + GP.t('Estado','Status') + '</td><td>' + e(GP.tv(p.estado)) + '</td></tr>' : '') +
+    (p.nota_campo ? '<tr><td>' + GP.t('Nota de campo','Field note') + '</td><td>' + e(p.nota_campo) + '</td></tr>' : '') +
+    '<tr><td>' + GP.t('Prof. fondo (SDB)','Seabed depth (SDB)') + '</td><td>' + GP.depth(p) + '</td></tr>' +
     (p.prof_tope_nucleo_m!==null && p.prof_tope_nucleo_m!==undefined ?
-      '<tr><td>Prof. tope núcleo</td><td><b>' + f(p.prof_tope_nucleo_m,1) + ' m</b> (WD, al perforar)</td></tr>' +
-      '<tr><td>Prof. total</td><td>' + f(p.prof_total_nucleo_m,1) + ' m (TD)</td></tr>' +
-      '<tr><td>Núcleo en tesis</td><td>' + e(p.nucleo_tesis) + ' (Islas-Domínguez 2023)</td></tr>' : '') +
+      '<tr><td>' + GP.t('Prof. tope núcleo','Core-top depth') + '</td><td><b>' + f(p.prof_tope_nucleo_m,1) + ' m</b> ' + GP.t('(WD, al perforar)','(WD, at drilling)') + '</td></tr>' +
+      '<tr><td>' + GP.t('Prof. total','Total depth') + '</td><td>' + f(p.prof_total_nucleo_m,1) + ' m (TD)</td></tr>' +
+      '<tr><td>' + GP.t('Núcleo en tesis','Core in thesis') + '</td><td>' + e(p.nucleo_tesis) + ' (Islas-Domínguez 2023)</td></tr>' : '') +
     '</table>';
   if (p.flag_prof) h += '<div class="warn">' + e(p.flag_prof) + '</div>';
   if (p.tipo.startsWith("núcleo")) {
     h += LOGS[p.punto]
-      ? '<div class="logbtn" data-core="'+p.punto+'"><img src="'+LOGS[p.punto].src+'" alt=""><span>Ver escaneo y log de perforación con escala →</span></div>'
-      : '<div class="nolog">Log de perforación: por integrar.' + (p.foto_original ? '<br>Foto de campo original: ' + e(p.foto_original) + ' (no recuperada).' : '') + '</div>';
+      ? '<div class="logbtn" data-core="'+p.punto+'"><img src="'+LOGS[p.punto].src+'" alt=""><span>'+GP.t('Ver escaneo y log de perforación con escala →','View core scan and drilling log with scale →')+'</span></div>'
+      : '<div class="nolog">' + GP.t('Log de perforación: por integrar.','Drilling log: to be added.') + (p.foto_original ? GP.t('<br>Foto de campo original: ','<br>Original field photo: ') + e(p.foto_original) + GP.t(' (no recuperada).',' (not recovered).') : '') + '</div>';
   }
   return h;
 }
@@ -103,14 +104,14 @@ const tr = L.layerGroup().addTo(map);
   const pts = D.features.filter(f=>f.properties.transecto===t)
     .sort((a,b)=>parseInt(a.properties.punto.split("_S")[1])-parseInt(b.properties.punto.split("_S")[1]))
     .map(f=>[f.geometry.coordinates[1],f.geometry.coordinates[0]]);
-  L.polyline(pts,{color:"#ffffff",weight:2,dashArray:"5 5",opacity:.85}).bindTooltip("Transecto "+t,{sticky:true}).addTo(tr);
+  L.polyline(pts,{color:"#ffffff",weight:2,dashArray:"5 5",opacity:.85}).bindTooltip(GP.t("Transecto ","Transect ")+t,{sticky:true}).addTo(tr);
 });
 document.getElementById("trOn").addEventListener("change", e => e.target.checked ? tr.addTo(map) : map.removeLayer(tr));
 
 const tipos=Object.keys(STY), box=document.getElementById("tipoF");
 tipos.forEach(t=>{ const n=D.features.filter(f=>f.properties.tipo===t).length, s=STY[t];
   const ic = s.shape==="sq" ? '<rect x="1" y="1" width="10" height="10" fill="'+s.fill+'" stroke="#111"/>' : s.shape==="dia" ? '<polygon points="6,0.5 11.5,6 6,11.5 0.5,6" fill="'+s.fill+'" stroke="#111"/>' : '<circle cx="6" cy="6" r="5" fill="'+s.fill+'" stroke="#111"/>';
-  box.insertAdjacentHTML("beforeend",'<label><input type="checkbox" class="tp" value="'+t+'" checked> <svg class="sym" width="12" height="12">'+ic+'</svg>'+t+' ('+n+')</label>'); });
+  box.insertAdjacentHTML("beforeend",'<label><input type="checkbox" class="tp" value="'+t+'" checked> <svg class="sym" width="12" height="12">'+ic+'</svg>'+GP.tv(t)+' ('+n+')</label>'); });
 document.getElementById("total").textContent=markers.length;
 function apply(){
   const S=new Set([...document.querySelectorAll(".tp:checked")].map(i=>i.value));

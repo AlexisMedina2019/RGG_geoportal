@@ -16,46 +16,47 @@
 <body>
 <div class="app">
   <aside>
-    <div class="brand"><a class="back" href="index.html">← Todos los sitios</a><img src="img/rgg_logo.png" alt="Reef Geoscience Group"></div>
+    <div class="brand"><a class="back" href="index.html">← <span data-l="es">Todos los sitios</span><span data-l="en">All sites</span></a><img src="img/rgg_logo.png" alt="Reef Geoscience Group"></div>
     <h1 class="site">Punta Maroma, Quintana Roo</h1>
-    <p class="sub">Edades U-Th de corales holocénicos</p>
+    <p data-l="es" class="sub">Edades U-Th de corales holocénicos</p><p data-l="en" class="sub">U-Th ages of Holocene corals</p>
 
-    <h2>Muestras visibles</h2>
-    <div><b id="count">–</b> de <span id="total">–</span></div>
+    <h2 data-l="es">Muestras visibles</h2><h2 data-l="en">Visible samples</h2>
+    <div><b id="count">–</b> <span data-l="es">de</span><span data-l="en">of</span> <span id="total">–</span></div>
 
-    <h2>Fuente</h2><div id="srcF"></div>
-    <h2>Grupo</h2><div id="grpF"></div>
+    <h2 data-l="es">Fuente</h2><h2 data-l="en">Source</h2><div id="srcF"></div>
+    <h2 data-l="es">Grupo</h2><h2 data-l="en">Group</h2><div id="grpF"></div>
 
-    <h2>Edad (ka BP, 1950)</h2>
+    <h2 data-l="es">Edad (ka BP, 1950)</h2><h2 data-l="en">Age (ka BP, 1950)</h2>
     <div class="bar" id="ageBar"></div><div class="ticks" id="ageTicks"></div>
     <div class="row" style="margin-top:8px"><input type="number" id="ageMin" step="0.1"> – <input type="number" id="ageMax" step="0.1"> ka</div>
 
-    <h2>Batimetría (m, NMM)</h2>
-    <label><input type="checkbox" id="batOn" checked> Batimetría satelital CONABIO</label>
+    <h2 data-l="es">Batimetría (m, NMM)</h2><h2 data-l="en">Bathymetry (m, MSL)</h2>
+    <label><input type="checkbox" id="batOn" checked> <span data-l="es">Batimetría satelital CONABIO</span><span data-l="en">CONABIO satellite bathymetry</span></label>
     <div class="bar" style="background:linear-gradient(to right,#081d58,#08306b,#2171b5,#6baed6,#c6dbef,#f7fbff)"></div>
     <div class="ticks"><span>−20</span><span>−12</span><span>−8</span><span>−4</span><span>−2</span><span>0</span></div>
-    <div class="row" style="margin-top:6px">Opacidad <input type="range" id="batOp" min="0" max="1" step="0.05" value="0.55" style="flex:1"></div>
+    <div class="row" style="margin-top:6px"><span data-l="es">Opacidad</span><span data-l="en">Opacity</span> <input type="range" id="batOp" min="0" max="1" step="0.05" value="0.55" style="flex:1"></div>
 
-    <h2>Notas</h2>
-    <p class="ref">▲ Núcleos de Blanchon et al. (2017): al hacer clic se abre el log de perforación con su escala, y la línea roja marca la profundidad de la muestra. No se conservan las coordenadas originales; la posición está reconstruida a partir de las figuras del artículo (±50 m).</p>
-    <p class="ref">Profundidad: valor de la batimetría satelital de CONABIO (4 m, nivel medio del mar) en la posición de la muestra. La incertidumbre (σ) combina el error del producto (0.5 m hasta 8 m de profundidad; 2 m entre 8 y 20 m) con la variabilidad del fondo dentro del radio de incertidumbre de posición.</p>
-    <p class="ref">Los círculos blancos numerados agrupan muestras con coordenadas iguales: haz clic para desplegarlas.</p>
+    <h2 data-l="es">Notas</h2><h2 data-l="en">Notes</h2>
+    <p data-l="es" class="ref">▲ Núcleos de Blanchon et al. (2017): al hacer clic se abre el log de perforación con su escala, y la línea roja marca la profundidad de la muestra. No se conservan las coordenadas originales; la posición está reconstruida a partir de las figuras del artículo (±50 m).</p><p data-l="en" class="ref">▲ Cores from Blanchon et al. (2017): clicking opens the drilling log with its scale, and the red line marks the sample depth. The original coordinates were not preserved; positions are reconstructed from the paper's figures (±50 m).</p>
+    <p data-l="es" class="ref">Profundidad: valor de la batimetría satelital de CONABIO (4 m, nivel medio del mar) en la posición de la muestra. La incertidumbre (σ) combina el error del producto (0.5 m hasta 8 m de profundidad; 2 m entre 8 y 20 m) con la variabilidad del fondo dentro del radio de incertidumbre de posición.</p><p data-l="en" class="ref">Depth: value of the CONABIO satellite bathymetry (4 m, mean sea level) at the sample position. The uncertainty (σ) combines the product error (0.5 m down to 8 m depth; 2 m between 8 and 20 m) with the variability of the seabed within the position-uncertainty radius.</p>
+    <p data-l="es" class="ref">Los círculos blancos numerados agrupan muestras con coordenadas iguales: haz clic para desplegarlas.</p><p data-l="en" class="ref">Numbered white circles group samples with identical coordinates: click to expand them.</p>
 
-    <h2>Referencias</h2>
+    <h2 data-l="es">Referencias</h2><h2 data-l="en">References</h2>
     <p class="ref">Medina-Valmaseda A. et al. (2025). Centennial-scale gaps in a 5500-year acroporid growth trajectory from a Caribbean coral reef. <i>R. Soc. Open Sci.</i> 12: 250363. <a href="https://doi.org/10.1098/rsos.250363">doi</a></p>
-    <p class="ref">Blanchon P. et al. (2017). Retrograde accretion of a Caribbean fringing reef controlled by hurricanes and sea-level rise. <i>Front. Earth Sci.</i> 5: 78. <a href="https://doi.org/10.3389/feart.2017.00078">doi</a> (figuras CC BY 4.0)</p>
+    <p class="ref">Blanchon P. et al. (2017). Retrograde accretion of a Caribbean fringing reef controlled by hurricanes and sea-level rise. <i>Front. Earth Sci.</i> 5: 78. <a href="https://doi.org/10.3389/feart.2017.00078">doi</a> (<span data-l="es">figuras</span><span data-l="en">figures</span> CC BY 4.0)</p>
     <p class="ref">Cerdeira-Estrada S. et al. (2018). Batimetría de los Ecosistemas Marinos del Caribe Mexicano: Cabo Catoche – Xcalak, ed. 2. CONABIO. <a href="http://creativecommons.org/licenses/by-nc/2.5/mx/">CC BY-NC 2.5 MX</a></p>
-    <p class="ref"><a href="data/punta_maroma.geojson">Descargar datos (GeoJSON)</a></p>
+    <p class="ref"><a href="data/punta_maroma.geojson"><span data-l="es">Descargar datos (GeoJSON)</span><span data-l="en">Download data (GeoJSON)</span></a></p>
   </aside>
   <div id="map"></div>
 </div>
 <script>
 const D = GEO.puntaMaroma;
+document.title = "Punta Maroma · " + GP.t("Geoportal EPM","EPM Geoportal");
 const LOGS = {};  // logs de Blanchon et al. 2017, Fig. 4 (recortados con escala)
 const WD = {F12:1.5,F11:2.0,F10:3.0,F8:2.0,F7:3.5,F9:4.0,F6:4.1,F5:4.2,F4:4.3,F3:3.5,F2:5.0,F1:5.7};
 Object.keys(WD).forEach(k => LOGS[k] = { src:"logs/PM_"+k+".jpg", wd:WD[k], y0:63.68, pxcm:8.82,
-  title:"Núcleo "+k+" · Punta Maroma",
-  caption:"Primer metro del núcleo (escala izquierda: cm desde el tope; derecha: m bajo el nivel del mar al perforar, sin corrección de marea). Edades en ka dentro de los círculos rojos. Fuente: Blanchon et al. (2017), Fig. 4, Front. Earth Sci. 5:78, CC BY 4.0." });
+  title:GP.t("Núcleo ","Core ")+k+" · Punta Maroma",
+  caption:GP.t("Primer metro del núcleo (escala izquierda: cm desde el tope; derecha: m bajo el nivel del mar al perforar, sin corrección de marea). Edades en ka dentro de los círculos rojos. Fuente: Blanchon et al. (2017), Fig. 4, Front. Earth Sci. 5:78, CC BY 4.0.","Upper metre of the core (left scale: cm from the top; right: m below sea level at drilling, not tide-corrected). Ages in ka inside the red circles. Source: Blanchon et al. (2017), Fig. 4, Front. Earth Sci. 5:78, CC BY 4.0.") });
 
 const AMIN=0, AMAX=6, isB = p => p.fuente.startsWith("Blanchon");
 document.getElementById("ageBar").style.background = "linear-gradient(to right," + GP.VIR.join(",") + ")";
@@ -66,21 +67,21 @@ const cl = GP.cluster(); map.addLayer(cl);
 
 function popup(p){
   const f=GP.fmt, e=GP.esc;
-  const sp = p.especie && !["NoID"].includes(p.especie_cod) && !String(p.especie).includes("(") ? "<i>"+e(p.especie)+"</i>" : e(p.especie);
+  const sp = p.especie && !["NoID"].includes(p.especie_cod) && !String(p.especie).includes("(") ? "<i>"+e(p.especie)+"</i>" : e(GP.tv(p.especie));
   let h = '<div class="pop-title">' + e(p.muestra) + '</div><table class="pop">' +
-    '<tr><td>Estación / núcleo</td><td>' + e(p.estacion) + '</td></tr>' +
-    '<tr><td>Especie</td><td>' + sp + '</td></tr>' +
-    '<tr><td>Tipo</td><td>' + e(p.tipo_muestra) + (p.replica==="yes" ? " · submuestra (réplica)" : "") + '</td></tr>' +
-    '<tr><td>Edad</td><td><b>' + f(p.edad_BP_ka,3) + ' ± ' + f(p.err_ka,3) + ' ka BP</b></td></tr>' +
-    '<tr><td>Edad publicada</td><td>' + f(p.edad_pub_ka,3) + ' ka' + (isB(p) ? ' (BP en la fuente)' : ' (ref. ' + p.anio_separacion + ')') + '</td></tr>' +
-    '<tr><td>δ²³⁴U inicial</td><td>' + f(p.d234U_inicial,1) + ' ‰</td></tr>' +
-    '<tr><td>Prof. fondo (SDB)</td><td>' + GP.depth(p) + '</td></tr>';
-  if (isB(p)) h += '<tr><td>Prof. tope núcleo</td><td>' + f(p.prof_tope_nucleo_m,1) + ' m (al perforar)</td></tr>' +
-                   '<tr><td>Prof. muestra</td><td>' + f(p.prof_muestra_nucleo_m,1) + ' m</td></tr>';
-  h += '<tr><td>Fuente</td><td><a href="https://doi.org/' + p.doi + '" target="_blank">' + e(p.fuente) + '</a></td></tr></table>';
-  if (isB(p) && LOGS[p.estacion]) h += '<div class="logbtn" data-core="'+p.estacion+'" data-depth="'+p.prof_muestra_nucleo_m+'" data-s="'+e(p.muestra)+'"><img src="'+LOGS[p.estacion].src+'" alt=""><span>Ver log de perforación de '+p.estacion+' con escala →</span></div>';
-  if (isB(p)) h += '<div class="warn">Posición reconstruida a partir de las figuras del artículo (±50 m).</div>';
-  if (!isB(p)) h += '<div class="nolog">Fotografía de la muestra / del pozo: por integrar.</div>';
+    '<tr><td>' + GP.t('Estación / núcleo','Station / core') + '</td><td>' + e(p.estacion) + '</td></tr>' +
+    '<tr><td>' + GP.t('Especie','Species') + '</td><td>' + sp + '</td></tr>' +
+    '<tr><td>' + GP.t('Tipo','Type') + '</td><td>' + e(GP.tv(p.tipo_muestra)) + (p.replica==="yes" ? GP.t(" · submuestra (réplica)"," · subsample (replicate)") : "") + '</td></tr>' +
+    '<tr><td>' + GP.t('Edad','Age') + '</td><td><b>' + f(p.edad_BP_ka,3) + ' ± ' + f(p.err_ka,3) + ' ka BP</b></td></tr>' +
+    '<tr><td>' + GP.t('Edad publicada','Published age') + '</td><td>' + f(p.edad_pub_ka,3) + ' ka' + (isB(p) ? GP.t(' (BP en la fuente)',' (BP in the source)') : ' (ref. ' + p.anio_separacion + ')') + '</td></tr>' +
+    '<tr><td>' + GP.t('δ²³⁴U inicial','Initial δ²³⁴U') + '</td><td>' + f(p.d234U_inicial,1) + ' ‰</td></tr>' +
+    '<tr><td>' + GP.t('Prof. fondo (SDB)','Seabed depth (SDB)') + '</td><td>' + GP.depth(p) + '</td></tr>';
+  if (isB(p)) h += '<tr><td>' + GP.t('Prof. tope núcleo','Core-top depth') + '</td><td>' + f(p.prof_tope_nucleo_m,1) + GP.t(' m (al perforar)',' m (at drilling)') + '</td></tr>' +
+                   '<tr><td>' + GP.t('Prof. muestra','Sample depth') + '</td><td>' + f(p.prof_muestra_nucleo_m,1) + ' m</td></tr>';
+  h += '<tr><td>' + GP.t('Fuente','Source') + '</td><td><a href="https://doi.org/' + p.doi + '" target="_blank">' + e(p.fuente) + '</a></td></tr></table>';
+  if (isB(p) && LOGS[p.estacion]) h += '<div class="logbtn" data-core="'+p.estacion+'" data-depth="'+p.prof_muestra_nucleo_m+'" data-s="'+e(p.muestra)+'"><img src="'+LOGS[p.estacion].src+'" alt=""><span>'+GP.t('Ver log de perforación de '+p.estacion+' con escala →','View drilling log of '+p.estacion+' with scale →')+'</span></div>';
+  if (isB(p)) h += '<div class="warn">'+GP.t('Posición reconstruida a partir de las figuras del artículo (±50 m).','Position reconstructed from the paper\'s figures (±50 m).')+'</div>';
+  if (!isB(p)) h += '<div class="nolog">'+GP.t('Fotografía de la muestra / del pozo: por integrar.','Sample / hole photograph: to be added.')+'</div>';
   return h;
 }
 document.addEventListener("click", ev => {
@@ -106,7 +107,7 @@ function checks(id, cls, key, labels, sym){
 checks("srcF","src","fuente",{}, v => v.startsWith("Blanchon")
   ? '<svg class="sym" width="12" height="12"><polygon points="6,1 11.5,11 0.5,11" fill="#888" stroke="#111"/></svg>'
   : '<svg class="sym" width="12" height="12"><circle cx="6" cy="6" r="5" fill="#888" stroke="#111"/></svg>');
-checks("grpF","grp","grupo",{"Acropora":"Acropora spp."});
+checks("grpF","grp","grupo",{"Acropora":"Acropora spp.","Otras especies":GP.tv("Otras especies")});
 const aMin=document.getElementById("ageMin"), aMax=document.getElementById("ageMax"); aMin.value=-0.1; aMax.value=AMAX;
 document.getElementById("total").textContent=markers.length;
 function apply(){
