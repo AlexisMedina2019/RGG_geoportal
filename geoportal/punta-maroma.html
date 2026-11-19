@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Punta Maroma · Geoportal EPM</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="img/rgg_icon.png">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="assets/geoportal.js"></script>
+<script src="data/punta_maroma.js"></script>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand"><a class="back" href="index.html">← Todos los sitios</a><img src="img/rgg_logo.png" alt="Reef Geoscience Group"></div>
+    <h1 class="site">Punta Maroma, Quintana Roo</h1>
+    <p class="sub">Edades U-Th de corales holocénicos</p>
+
+    <h2>Muestras visibles</h2>
+    <div><b id="count">–</b> de <span id="total">–</span></div>
+
+    <h2>Fuente</h2><div id="srcF"></div>
+    <h2>Grupo</h2><div id="grpF"></div>
+
+    <h2>Edad (ka BP, 1950)</h2>
+    <div class="bar" id="ageBar"></div><div class="ticks" id="ageTicks"></div>
+    <div class="row" style="margin-top:8px"><input type="number" id="ageMin" step="0.1"> – <input type="number" id="ageMax" step="0.1"> ka</div>
+
+    <h2>Batimetría (m, NMM)</h2>
+    <label><input type="checkbox" id="batOn" checked> Batimetría satelital CONABIO</label>
+    <div class="bar" style="background:linear-gradient(to right,#081d58,#08306b,#2171b5,#6baed6,#c6dbef,#f7fbff)"></div>
+    <div class="ticks"><span>−20</span><span>−12</span><span>−8</span><span>−4</span><span>−2</span><span>0</span></div>
+    <div class="row" style="margin-top:6px">Opacidad <input type="range" id="batOp" min="0" max="1" step="0.05" value="0.55" style="flex:1"></div>
+
+    <h2>Notas</h2>
+    <p class="ref">▲ Núcleos de Blanchon et al. (2017): al hacer clic se abre el log de perforación con su escala, y la línea roja marca la profundidad de la muestra. No se conservan las coordenadas originales; la posición está reconstruida a partir de las figuras del artículo (±50 m).</p>
+    <p class="ref">Profundidad: valor de la batimetría satelital de CONABIO (4 m, nivel medio del mar) en la posición de la muestra. La incertidumbre (σ) combina el error del producto (0.5 m hasta 8 m de profundidad; 2 m entre 8 y 20 m) con la variabilidad del fondo dentro del radio de incertidumbre de posición.</p>
+    <p class="ref">Los círculos blancos numerados agrupan muestras con coordenadas iguales: haz clic para desplegarlas.</p>
+
+    <h2>Referencias</h2>
+    <p class="ref">Medina-Valmaseda A. et al. (2025). Centennial-scale gaps in a 5500-year acroporid growth trajectory from a Caribbean coral reef. <i>R. Soc. Open Sci.</i> 12: 250363. <a href="https://doi.org/10.1098/rsos.250363">doi</a></p>
+    <p class="ref">Blanchon P. et al. (2017). Retrograde accretion of a Caribbean fringing reef controlled by hurricanes and sea-level rise. <i>Front. Earth Sci.</i> 5: 78. <a href="https://doi.org/10.3389/feart.2017.00078">doi</a> (figuras CC BY 4.0)</p>
+    <p class="ref">Cerdeira-Estrada S. et al. (2018). Batimetría de los Ecosistemas Marinos del Caribe Mexicano: Cabo Catoche – Xcalak, ed. 2. CONABIO. <a href="http://creativecommons.org/licenses/by-nc/2.5/mx/">CC BY-NC 2.5 MX</a></p>
+    <p class="ref"><a href="data/punta_maroma.geojson">Descargar datos (GeoJSON)</a></p>
+  </aside>
+  <div id="map"></div>
+</div>
+<script>
+const D = GEO.puntaMaroma;
+const LOGS = {};  // logs de Blanchon et al. 2017, Fig. 4 (recortados con escala)
+const WD = {F12:1.5,F11:2.0,F10:3.0,F8:2.0,F7:3.5,F9:4.0,F6:4.1,F5:4.2,F4:4.3,F3:3.5,F2:5.0,F1:5.7};
+Object.keys(WD).forEach(k => LOGS[k] = { src:"logs/PM_"+k+".jpg", wd:WD[k], y0:63.68, pxcm:8.82,
+  title:"Núcleo "+k+" · Punta Maroma",
+  caption:"Primer metro del núcleo (escala izquierda: cm desde el tope; derecha: m bajo el nivel del mar al perforar, sin corrección de marea). Edades en ka dentro de los círculos rojos. Fuente: Blanchon et al. (2017), Fig. 4, Front. Earth Sci. 5:78, CC BY 4.0." });
+
+const AMIN=0, AMAX=6, isB = p => p.fuente.startsWith("Blanchon");
+document.getElementById("ageBar").style.background = "linear-gradient(to right," + GP.VIR.join(",") + ")";
+document.getElementById("ageTicks").innerHTML = Array.from({length:AMAX+1},(_,i)=>"<span>"+i+"</span>").join("");
+
+const map = GP.map("map", "img/batimetria_PuntaMaroma.png", GEO.puntaMaromaBat);
+const cl = GP.cluster(); map.addLayer(cl);
+
+function popup(p){
+  const f=GP.fmt, e=GP.esc;
+  const sp = p.especie && !["NoID"].includes(p.especie_cod) && !String(p.especie).includes("(") ? "<i>"+e(p.especie)+"</i>" : e(p.especie);
+  let h = '<div class="pop-title">' + e(p.muestra) + '</div><table class="pop">' +
+    '<tr><td>Estación / núcleo</td><td>' + e(p.estacion) + '</td></tr>' +
+    '<tr><td>Especie</td><td>' + sp + '</td></tr>' +
+    '<tr><td>Tipo</td><td>' + e(p.tipo_muestra) + (p.replica==="yes" ? " · submuestra (réplica)" : "") + '</td></tr>' +
+    '<tr><td>Edad</td><td><b>' + f(p.edad_BP_ka,3) + ' ± ' + f(p.err_ka,3) + ' ka BP</b></td></tr>' +
+    '<tr><td>Edad publicada</td><td>' + f(p.edad_pub_ka,3) + ' ka' + (isB(p) ? ' (BP en la fuente)' : ' (ref. ' + p.anio_separacion + ')') + '</td></tr>' +
+    '<tr><td>δ²³⁴U inicial</td><td>' + f(p.d234U_inicial,1) + ' ‰</td></tr>' +
+    '<tr><td>Prof. fondo (SDB)</td><td>' + GP.depth(p) + '</td></tr>';
+  if (isB(p)) h += '<tr><td>Prof. tope núcleo</td><td>' + f(p.prof_tope_nucleo_m,1) + ' m (al perforar)</td></tr>' +
+                   '<tr><td>Prof. muestra</td><td>' + f(p.prof_muestra_nucleo_m,1) + ' m</td></tr>';
+  h += '<tr><td>Fuente</td><td><a href="https://doi.org/' + p.doi + '" target="_blank">' + e(p.fuente) + '</a></td></tr></table>';
+  if (isB(p) && LOGS[p.estacion]) h += '<div class="logbtn" data-core="'+p.estacion+'" data-depth="'+p.prof_muestra_nucleo_m+'" data-s="'+e(p.muestra)+'"><img src="'+LOGS[p.estacion].src+'" alt=""><span>Ver log de perforación de '+p.estacion+' con escala →</span></div>';
+  if (isB(p)) h += '<div class="warn">Posición reconstruida a partir de las figuras del artículo (±50 m).</div>';
+  if (!isB(p)) h += '<div class="nolog">Fotografía de la muestra / del pozo: por integrar.</div>';
+  return h;
+}
+document.addEventListener("click", ev => {
+  const b = ev.target.closest(".logbtn"); if (!b || !LOGS[b.dataset.core]) return;
+  const core = b.dataset.core;
+  const marks = D.features.filter(f => f.properties.estacion===core).map(f => ({ depth_m:f.properties.prof_muestra_nucleo_m, label:f.properties.muestra+" · "+GP.fmt(f.properties.edad_BP_ka,2)+" ka" }));
+  GP.openLog(LOGS[core], marks);
+});
+
+const markers = D.features.map(f => {
+  const [lon,lat]=f.geometry.coordinates, p=f.properties, col=GP.viridis(p.edad_BP_ka,AMIN,AMAX);
+  const m = isB(p) ? L.marker([lat,lon], { icon:GP.svgIcon("tri",col,18) })
+                   : L.circleMarker([lat,lon], { radius:7, weight:1.2, color:"#111", fillColor:col, fillOpacity:.95 });
+  m.bindPopup(popup(p), { maxWidth:320 });
+  m.bindTooltip(GP.esc(p.muestra)+" · "+GP.fmt(p.edad_BP_ka,2)+" ka BP", { direction:"top", offset:[0,-6] });
+  m._p=p; return m;
+});
+function checks(id, cls, key, labels, sym){
+  const vals=[...new Set(D.features.map(f=>f.properties[key]))].sort(), box=document.getElementById(id);
+  vals.forEach(v=>{ const n=D.features.filter(f=>f.properties[key]===v).length;
+    box.insertAdjacentHTML("beforeend",'<label><input type="checkbox" class="'+cls+'" value="'+v+'" checked> '+(sym?sym(v):"")+(labels[v]||v)+' ('+n+')</label>'); });
+}
+checks("srcF","src","fuente",{}, v => v.startsWith("Blanchon")
+  ? '<svg class="sym" width="12" height="12"><polygon points="6,1 11.5,11 0.5,11" fill="#888" stroke="#111"/></svg>'
+  : '<svg class="sym" width="12" height="12"><circle cx="6" cy="6" r="5" fill="#888" stroke="#111"/></svg>');
+checks("grpF","grp","grupo",{"Acropora":"Acropora spp."});
+const aMin=document.getElementById("ageMin"), aMax=document.getElementById("ageMax"); aMin.value=-0.1; aMax.value=AMAX;
+document.getElementById("total").textContent=markers.length;
+function apply(){
+  const S=new Set([...document.querySelectorAll(".src:checked")].map(i=>i.value)), G=new Set([...document.querySelectorAll(".grp:checked")].map(i=>i.value));
+  const lo=parseFloat(aMin.value), hi=parseFloat(aMax.value);
+  const vis=markers.filter(m=>S.has(m._p.fuente)&&G.has(m._p.grupo)&&m._p.edad_BP_ka>=(isNaN(lo)?-Infinity:lo)&&m._p.edad_BP_ka<=(isNaN(hi)?Infinity:hi));
+  cl.clearLayers(); cl.addLayers(vis); document.getElementById("count").textContent=vis.length;
+}
+document.querySelectorAll(".src,.grp").forEach(i=>i.addEventListener("change",apply)); [aMin,aMax].forEach(i=>i.addEventListener("input",apply));
+apply(); map.fitBounds(L.featureGroup(markers).getBounds(), { padding:[30,30] });
+</script>
+</body>
+</html>

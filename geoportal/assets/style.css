@@ -1,0 +1,83 @@
+:root { --ink:#1d2733; --muted:#5d6b7a; --line:#d9e0e7; --bg:#f4f7f9; --accent:#0b6e8a; --deep:#0e3a52; --warn:#9a5b00; }
+* { box-sizing:border-box; }
+html,body { margin:0; height:100%; font-family:"Segoe UI", system-ui, -apple-system, sans-serif; color:var(--ink); background:var(--bg); }
+a { color:var(--accent); }
+
+/* ---------- Portada ---------- */
+.hero { color:#fff; padding:64px 24px 56px; position:relative;
+  background: linear-gradient(90deg, rgba(10,40,58,.82) 0%, rgba(10,40,58,.55) 55%, rgba(10,40,58,.25) 100%), url("../img/portada_fondo.jpg") center 60% / cover no-repeat, #0e3a52; }
+.hero .inner { max-width:1000px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:32px; }
+.hero .txt { text-align:left; }
+.hero h1 { margin:0 0 8px; font-size:40px; letter-spacing:.5px; text-shadow:0 2px 8px rgba(0,0,0,.45); }
+.hero p { margin:0; max-width:620px; font-size:15px; line-height:1.55; opacity:.97; text-shadow:0 1px 4px rgba(0,0,0,.5); }
+.band { background:#1f5c78; color:#eaf4f8; padding:18px 24px; }
+.band p { max-width:860px; margin:0 auto; font-size:14px; line-height:1.55; }
+.grid { max-width:1000px; margin:28px auto 40px; display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:26px; padding:0 20px; }
+.card { background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,.12); text-decoration:none; color:var(--ink); display:flex; flex-direction:column; transition:transform .12s, box-shadow .12s; }
+.card:hover { transform:translateY(-2px); box-shadow:0 4px 14px rgba(0,0,0,.18); }
+.card img { width:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
+.card .ph { width:100%; aspect-ratio:1/1; background:#c9d6de; display:flex; align-items:center; justify-content:center; color:#5d6b7a; font-size:13px; }
+.card h3 { margin:12px 14px 2px; font-size:18px; }
+.card .st { margin:0 14px 14px; font-size:12.5px; color:var(--muted); }
+.card .tag { display:inline-block; font-size:11px; padding:1px 7px; border-radius:10px; margin-left:4px; vertical-align:1px; }
+.tag.ok { background:#dff3e6; color:#1d6b3a; } .tag.go { background:#fff1d6; color:#8a5a00; }
+.foot { text-align:center; font-size:12px; color:var(--muted); padding:0 20px 30px; }
+
+/* ---------- Página de sitio ---------- */
+.app { display:grid; grid-template-columns:320px 1fr; height:100vh; }
+aside { background:#fff; border-right:1px solid var(--line); padding:14px 18px; overflow:auto; font-size:13px; }
+.back { font-size:12.5px; text-decoration:none; }
+h1.site { font-size:19px; margin:8px 0 2px; line-height:1.25; }
+.sub { color:var(--muted); margin:0 0 10px; }
+.draft { background:#fff4d6; border:1px solid #f0d58a; border-radius:6px; padding:6px 8px; font-size:12px; margin-bottom:8px; }
+h2 { font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:16px 0 6px; }
+label { display:block; margin:3px 0; cursor:pointer; }
+.row { display:flex; gap:6px; align-items:center; }
+.row input[type=number] { width:70px; padding:3px 5px; border:1px solid var(--line); border-radius:4px; font:inherit; }
+.bar { height:11px; border-radius:3px; margin:4px 0 2px; }
+.ticks { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; }
+.ref { color:var(--muted); font-size:12px; line-height:1.45; margin:4px 0; }
+.sym { display:inline-block; vertical-align:-2px; margin-right:5px; }
+#map { height:100%; }
+table.pop { border-collapse:collapse; font-size:12px; }
+table.pop td { padding:1px 8px 1px 0; vertical-align:top; }
+table.pop td:first-child { color:var(--muted); white-space:nowrap; }
+.pop-title { font-weight:600; font-size:13.5px; margin-bottom:4px; }
+.warn { color:var(--warn); font-size:11px; margin-top:4px; max-width:270px; }
+.logbtn { display:flex; gap:8px; align-items:center; margin-top:8px; padding:6px; border:1px solid var(--line); border-radius:6px; cursor:pointer; background:#f7fafc; }
+.logbtn:hover { background:#eef5f8; }
+.logbtn img { height:70px; width:auto; border:1px solid #ccc; }
+.logbtn span { font-size:12px; color:var(--accent); }
+.nolog { margin-top:8px; padding:6px 8px; border:1px dashed #c9d3db; border-radius:6px; font-size:11.5px; color:var(--muted); max-width:270px; }
+.cl { background:#fff; border:2px solid var(--ink); border-radius:50%; width:26px!important; height:26px!important; margin:-13px 0 0 -13px!important;
+      display:flex; align-items:center; justify-content:center; font-weight:700; font-size:11px; color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,.4); }
+.dv { background:none; border:none; }
+
+/* Visor de log */
+.lb { position:fixed; inset:0; background:rgba(10,20,30,.72); display:none; z-index:2000; align-items:flex-start; justify-content:center; overflow:auto; padding:24px; }
+.lb.on { display:flex; }
+.lb .box { background:#fff; border-radius:8px; padding:14px 90px 14px 16px; position:relative; max-width:95vw; }
+.lb .close { position:absolute; top:6px; right:10px; font-size:22px; cursor:pointer; color:var(--muted); background:none; border:none; }
+.lb .imgwrap { position:relative; display:inline-block; }
+.lb .imgwrap img { display:block; height:min(86vh,1043px); width:auto; }
+.lb .mk { position:absolute; left:-6px; right:-6px; height:0; border-top:2px solid #e0201b; }
+.lb .mk span { position:absolute; left:100%; top:-9px; white-space:nowrap; font-size:11px; color:#e0201b; font-weight:600; padding-left:4px; background:rgba(255,255,255,.85); }
+.lb .cap { font-size:12px; color:var(--muted); margin-top:6px; max-width:420px; }
+@media (max-width:760px) { .hero .inner { flex-direction:column-reverse; text-align:center; } .hero .txt { text-align:center; } .hero .logo { height:80px; } .app { grid-template-columns:1fr; grid-template-rows:auto 65vh; } .hero h1 { font-size:30px; } }
+
+/* Marca RGG */
+.hero .logo { height:110px; width:auto; display:block; flex:0 0 auto; filter:drop-shadow(0 2px 6px rgba(0,0,0,.45)); }
+.brand { background:#0e3a52; margin:-14px -18px 10px; padding:10px 18px; display:flex; align-items:center; justify-content:space-between; }
+.brand img { height:40px; width:auto; display:block; }
+.brand a.back { color:#ffd866; }
+
+/* ---------- Modo incrustado (Google Sites) ---------- */
+html.embed .app { grid-template-columns:1fr; grid-template-rows:1fr; position:relative; height:100vh; }
+html.embed aside { position:absolute; top:0; left:0; bottom:0; width:min(320px,88%); z-index:1600; transform:translateX(-105%); transition:transform .2s; box-shadow:2px 0 12px rgba(0,0,0,.25); }
+html.embed aside.open { transform:none; }
+html.embed .brand .back { display:none; }
+html.embed #map { height:100vh; }
+.embar { position:absolute; top:10px; left:54px; right:56px; z-index:1700; display:flex; gap:8px; justify-content:space-between; pointer-events:none; }
+.embar > * { pointer-events:auto; font:600 12px "Segoe UI",system-ui,sans-serif; background:#fff; color:var(--deep); border:1px solid #b9c6d0; border-radius:5px; padding:6px 10px; box-shadow:0 1px 4px rgba(0,0,0,.2); cursor:pointer; text-decoration:none; }
+html.embed aside.open ~ .embar .eb-info { background:var(--deep); color:#fff; }
+html.embed aside.open ~ .embar { left:calc(min(320px,88%) + 10px); }

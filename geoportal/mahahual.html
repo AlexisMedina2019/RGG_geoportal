@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mahahual · Geoportal EPM</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="img/rgg_icon.png">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/geoportal.js"></script>
+<script src="data/mahahual.js"></script>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand"><a class="back" href="index.html">← Todos los sitios</a><img src="img/rgg_logo.png" alt="Reef Geoscience Group"></div>
+    <h1 class="site">Mahahual, Quintana Roo</h1>
+    <p class="sub">Núcleos perforados en 2021–2022 · muestras superficiales 2025–2026</p>
+    <div class="draft">Proyecto en curso: las muestras aún no están fechadas (fechamiento U-Th pendiente).</div>
+
+    <h2>Puntos visibles</h2>
+    <div><b id="count">–</b> de <span id="total">–</span></div>
+
+    <h2>Tipo</h2><div id="tipoF"></div>
+    <label style="margin-top:6px"><input type="checkbox" id="trOn" checked> Mostrar transectos T1 y T2</label>
+
+    <h2>Profundidad SDB (m, NMM)</h2>
+    <label><input type="checkbox" id="batOn" checked> Batimetría satelital CONABIO</label>
+    <div class="bar" style="background:linear-gradient(to right,#081d58,#08306b,#2171b5,#6baed6,#c6dbef,#f7fbff)"></div>
+    <div class="ticks"><span>−20</span><span>−12</span><span>−8</span><span>−4</span><span>−2</span><span>0</span></div>
+    <div class="row" style="margin-top:6px">Opacidad <input type="range" id="batOp" min="0" max="1" step="0.05" value="0.55" style="flex:1"></div>
+
+    <h2>Notas</h2>
+    <p class="ref">■ Núcleos (C): en el popup, el botón del log abre el escaneo del núcleo y su log de composición, con escala (Islas-Domínguez 2023).</p>
+    <p class="ref">● Muestras superficiales (S), en los transectos T1 y T2.</p>
+    <p class="ref">Profundidad de los núcleos: la profundidad del agua al perforar (WD) y la profundidad total (TD) provienen de Islas-Domínguez (2023). WD es en promedio 1.6 ± 0.8 m más profunda que la batimetría satelital (r = 0.97). La explicación más probable es que los núcleos se perforaron en puntos bajos del sustrato (surcos), cuyo relieve promedia la batimetría de 4 m; también influyen la marea, que no se corrigió en WD, y el error propio del producto.</p>
+    <p class="ref">Coordenadas del GPS de campo (incertidumbre ~5 m). Profundidad: batimetría satelital de CONABIO (4 m, nivel medio del mar). σ combina el error del producto (0.5 m hasta 8 m; 2 m entre 8 y 20 m) con la variabilidad del fondo en un radio de 5 m. Comprobación: en MHA_T1_S10 la nota de campo dice 10 m y la batimetría da −10.5 ± 2.0 m.</p>
+
+    <h2>Referencias</h2>
+    <p class="ref">Cerdeira-Estrada S. et al. (2018). Batimetría de los Ecosistemas Marinos del Caribe Mexicano: Cabo Catoche – Xcalak, ed. 2. CONABIO. <a href="http://creativecommons.org/licenses/by-nc/2.5/mx/">CC BY-NC 2.5 MX</a></p>
+    <p class="ref">Islas-Domínguez E.G. (2023). <i>Zonation, structure and geological development of a fringing reef at Mahahual</i>. Tesis de Maestría, Posgrado en Ciencias del Mar y Limnología, UNAM.</p>
+    <p class="ref"><a href="data/mahahual.geojson">Descargar datos (GeoJSON)</a></p>
+  </aside>
+  <div id="map"></div>
+</div>
+<script>
+const D = GEO.mahahual;
+/* Logs de perforación de Mahahual (tesis del grupo).
+   Para integrar un núcleo: guardar la imagen en logs/MHA_<punto>.jpg y añadir una entrada:
+   "MHA_1A": { src:"logs/MHA_1A.jpg", wd:<prof. del tope en m>, y0:<px del 0 cm>, pxcm:<px por cm>, title:"…", caption:"…" }  */
+const LOGS = {};
+const WD_MHA = {MHA_1A:2.6,MHA_1B:2.6,MHA_2:3.6,MHA_3A:4.0,MHA_3B:4.2,MHA_4:5.5,MHA_5A:6.5,MHA_5B:6.5,MHA_6:7.5,MHA_7A:9.5,MHA_7B:9.5,MHA_8A:10.5,MHA_8B:11.0};
+const TESIS = {MHA_1A:"M1a",MHA_1B:"M1b",MHA_2:"M2",MHA_3A:"M3a",MHA_3B:"M3b",MHA_4:"M4",MHA_5A:"M5a",MHA_5B:"M5b",MHA_6:"M6",MHA_7A:"M7a",MHA_7B:"M7b",MHA_8A:"M8a",MHA_8B:"M8b"};
+/* Calibración de la escala del log B (m bajo la interfaz agua/sustrato) en píxeles de cada imagen:
+   y0 = píxel de 0.0 m; pxcm = píxeles por cm. Verificada: la longitud de cada escala coincide con TD − WD. */
+const CAL = {"MHA_1A": {"y0": 144.1, "pxcm": 6.634}, "MHA_1B": {"y0": 348.7, "pxcm": 6.649}, "MHA_2": {"y0": 141.0, "pxcm": 6.634}, "MHA_3A": {"y0": 137.2, "pxcm": 6.634}, "MHA_3B": {"y0": 167.9, "pxcm": 6.448}, "MHA_4": {"y0": 160.2, "pxcm": 6.634}, "MHA_5A": {"y0": 138.8, "pxcm": 6.448}, "MHA_5B": {"y0": 153.4, "pxcm": 5.487}, "MHA_6": {"y0": 146.2, "pxcm": 4.402}, "MHA_7A": {"y0": 146.8, "pxcm": 6.448}, "MHA_7B": {"y0": 144.4, "pxcm": 6.433}, "MHA_8A": {"y0": 163.9, "pxcm": 6.634}, "MHA_8B": {"y0": 145.6, "pxcm": 6.433}};
+Object.keys(TESIS).forEach(k => LOGS[k] = { src:"logs/"+k+".jpg", wd:WD_MHA[k], y0:CAL[k].y0, pxcm:CAL[k].pxcm,
+  title:"Núcleo "+TESIS[k]+" ("+k+") · Mahahual",
+  caption:"A: escaneo del núcleo (escala en cm). B: log de composición (escala en m bajo la interfaz agua/sustrato), con WD (profundidad del agua en el tope) y TD (profundidad total). Cuando haya edades, su posición se marcará en rojo sobre el log B. Fuente: Islas-Domínguez E.G. (2023), <i>Zonation, structure and geological development of a fringing reef at Mahahual</i>, tesis de Maestría, PCML-UNAM; archivo de trabajo «Sampling 4 dating Mahahual», Reef Geoscience Group." });
+/* Profundidad del tope (WD) de cada núcleo, de Islas-Domínguez (2023), Fig. 17: se usa para la escala del log */
+
+const STY = { "núcleo (C)":{shape:"sq",fill:"#f2a922",size:16}, "muestra superficial (S)":{shape:"circle",fill:"#ffffff",size:14}, "observación":{shape:"dia",fill:"#9aa5b1",size:14} };
+const map = GP.map("map", "img/batimetria_Mahahual.png", GEO.mahahualBat);
+const grp = L.layerGroup().addTo(map);
+
+function popup(p){
+  const f=GP.fmt, e=GP.esc;
+  let h = '<div class="pop-title">' + e(p.punto) + '</div><table class="pop">' +
+    '<tr><td>Tipo</td><td>' + e(p.tipo) + (p.transecto ? ' · transecto ' + e(p.transecto) : '') + '</td></tr>' +
+    '<tr><td>Campaña</td><td>' + e(p.campania) + '</td></tr>' +
+    (p.estado ? '<tr><td>Estado</td><td>' + e(p.estado) + '</td></tr>' : '') +
+    (p.nota_campo ? '<tr><td>Nota de campo</td><td>' + e(p.nota_campo) + '</td></tr>' : '') +
+    '<tr><td>Prof. fondo (SDB)</td><td>' + GP.depth(p) + '</td></tr>' +
+    (p.prof_tope_nucleo_m!==null && p.prof_tope_nucleo_m!==undefined ?
+      '<tr><td>Prof. tope núcleo</td><td><b>' + f(p.prof_tope_nucleo_m,1) + ' m</b> (WD, al perforar)</td></tr>' +
+      '<tr><td>Prof. total</td><td>' + f(p.prof_total_nucleo_m,1) + ' m (TD)</td></tr>' +
+      '<tr><td>Núcleo en tesis</td><td>' + e(p.nucleo_tesis) + ' (Islas-Domínguez 2023)</td></tr>' : '') +
+    '</table>';
+  if (p.flag_prof) h += '<div class="warn">' + e(p.flag_prof) + '</div>';
+  if (p.tipo.startsWith("núcleo")) {
+    h += LOGS[p.punto]
+      ? '<div class="logbtn" data-core="'+p.punto+'"><img src="'+LOGS[p.punto].src+'" alt=""><span>Ver escaneo y log de perforación con escala →</span></div>'
+      : '<div class="nolog">Log de perforación: por integrar.' + (p.foto_original ? '<br>Foto de campo original: ' + e(p.foto_original) + ' (no recuperada).' : '') + '</div>';
+  }
+  return h;
+}
+document.addEventListener("click", ev => {
+  const b = ev.target.closest(".logbtn"); if (!b || !LOGS[b.dataset.core]) return;
+  GP.openLog(LOGS[b.dataset.core], []);
+});
+
+const markers = D.features.map(f => {
+  const [lon,lat]=f.geometry.coordinates, p=f.properties, s=STY[p.tipo];
+  const m = L.marker([lat,lon], { icon:GP.svgIcon(s.shape,s.fill,s.size) });
+  m.bindPopup(popup(p), { maxWidth:320 });
+  m.bindTooltip(GP.esc(p.punto) + " · " + GP.fmt(p.prof_conabio_m,1) + " m", { direction:"top", offset:[0,-7] });
+  m._p=p; return m;
+});
+// transectos (ordenados por número de estación)
+const tr = L.layerGroup().addTo(map);
+["T1","T2"].forEach(t => {
+  const pts = D.features.filter(f=>f.properties.transecto===t)
+    .sort((a,b)=>parseInt(a.properties.punto.split("_S")[1])-parseInt(b.properties.punto.split("_S")[1]))
+    .map(f=>[f.geometry.coordinates[1],f.geometry.coordinates[0]]);
+  L.polyline(pts,{color:"#ffffff",weight:2,dashArray:"5 5",opacity:.85}).bindTooltip("Transecto "+t,{sticky:true}).addTo(tr);
+});
+document.getElementById("trOn").addEventListener("change", e => e.target.checked ? tr.addTo(map) : map.removeLayer(tr));
+
+const tipos=Object.keys(STY), box=document.getElementById("tipoF");
+tipos.forEach(t=>{ const n=D.features.filter(f=>f.properties.tipo===t).length, s=STY[t];
+  const ic = s.shape==="sq" ? '<rect x="1" y="1" width="10" height="10" fill="'+s.fill+'" stroke="#111"/>' : s.shape==="dia" ? '<polygon points="6,0.5 11.5,6 6,11.5 0.5,6" fill="'+s.fill+'" stroke="#111"/>' : '<circle cx="6" cy="6" r="5" fill="'+s.fill+'" stroke="#111"/>';
+  box.insertAdjacentHTML("beforeend",'<label><input type="checkbox" class="tp" value="'+t+'" checked> <svg class="sym" width="12" height="12">'+ic+'</svg>'+t+' ('+n+')</label>'); });
+document.getElementById("total").textContent=markers.length;
+function apply(){
+  const S=new Set([...document.querySelectorAll(".tp:checked")].map(i=>i.value));
+  grp.clearLayers(); const vis=markers.filter(m=>S.has(m._p.tipo)); vis.forEach(m=>grp.addLayer(m));
+  document.getElementById("count").textContent=vis.length;
+}
+document.querySelectorAll(".tp").forEach(i=>i.addEventListener("change",apply));
+apply(); map.fitBounds(L.featureGroup(markers).getBounds(), { padding:[40,40] });
+</script>
+</body>
+</html>
