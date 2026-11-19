@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Xcaret · Geoportal EPM</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="img/rgg_icon.png">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/geoportal.js"></script>
+<script src="data/xcaret.js"></script>
+<style>
+  .pnl { position:relative; display:inline-block; }
+  .lbx .box { padding-right:16px; }
+  .lbx .imgwrap { display:block; width:min(1300px,90vw); overflow-x:auto; }
+  .lbx .imgwrap .pnl img { display:block; width:min(1300px,90vw); height:auto; max-width:none; cursor:zoom-in; }
+  .lbx .imgwrap.z .pnl img { width:auto; height:560px; cursor:zoom-out; }
+  .band6 { position:absolute; top:0; bottom:0; width:22px; margin-left:-11px; background:rgba(11,110,138,.18); border-left:2px solid #0b6e8a; border-right:2px solid #0b6e8a; pointer-events:none; }
+  .dot6 { position:absolute; width:10px; height:10px; margin:-5px 0 0 -5px; border-radius:50%; border:2px solid #e0201b; background:#fff; }
+  .dot6.u { border-color:#8a96a3; }
+  .dot6 span { position:absolute; left:12px; top:-8px; white-space:nowrap; font-size:11px; font-weight:600; color:#e0201b; background:rgba(255,255,255,.88); padding:0 3px; }
+  .dot6.u span { color:#5d6b7a; font-weight:400; }
+  table.ages { border-collapse:collapse; font-size:11.5px; margin-top:6px; }
+  table.ages td, table.ages th { padding:1px 5px; border-bottom:1px solid #e6ebef; text-align:right; }
+  table.ages th { color:#5d6b7a; font-weight:600; }
+  table.ages td:first-child, table.ages th:first-child { text-align:left; }
+  table.ages tr.u td { color:#8a96a3; }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand"><a class="back" href="index.html">← Todos los sitios</a><img src="img/rgg_logo.png" alt="Reef Geoscience Group"></div>
+    <h1 class="site">Xcaret, Quintana Roo</h1>
+    <p class="sub">Arrecife del último interglaciar (MIS 5e) · secciones verticales y edades U-Th</p>
+    <div class="draft">Coordenadas reconstruidas a partir de figuras publicadas; no son posiciones de GPS. Ver Notas.</div>
+
+    <h2>Secciones visibles</h2>
+    <div><b id="count">–</b> de <span id="total">–</span></div>
+    <label style="margin-top:6px"><input type="checkbox" id="soloF"> Solo secciones fechadas</label>
+    <label><input type="checkbox" id="trOn" checked> Mostrar transectos XA-B, XC y XD-E</label>
+    <label><input type="checkbox" id="altOn"> Posición según la Fig. 5 cuando discrepa más de 10 m</label>
+
+    <h2>Edad U-Th (mediana de las confiables, ka)</h2>
+    <div class="bar" style="background:linear-gradient(to right,#440154,#3e4989,#26828e,#35b779,#b5de2b,#fde725)"></div>
+    <div class="ticks"><span>115</span><span>120</span><span>125</span><span>130</span><span>135</span></div>
+    <p class="ref" style="margin-top:6px">● gris oscuro: fechada, sin edades confiables · ○ gris claro: sin fechar.</p>
+
+    <h2>Notas</h2>
+    <p class="ref"><b>Elevación</b>: altura sobre el nivel medio del mar actual, medida en cada sección con un datum de nivel del mar; error ±15 cm (Blanchon 2010). Son afloramientos emergidos, así que no se usa la batimetría.</p>
+    <p class="ref"><b>Edades</b>: <sup>230</sup>Th/U, error 2σ (Blanchon et al. 2009; tabla original de A. Eisenhauer). «Confiable (r)» y «no confiable (u)» son la clasificación de los autores; las confiables tienen δ<sup>234</sup>U inicial de 143–156 ‰, cercano al del agua de mar. En gris se muestran las no confiables o sin clasificar. Las edades están referidas al año del análisis; restar ~0.06 ka para pasarlas a BP (1950).</p>
+    <p class="ref"><b>Coordenadas</b>: se tomaron del mapa de paradas de campo del grupo (sobre imagen satelital), registrado con la imagen Esri actual mediante 75 puntos homólogos (similitud; RMS 1.6 m; validación cruzada 1.7 m; 2–4 m al extrapolar tierra adentro). Las secciones se compararon con la Fig. 5 de Blanchon (2010): en 24 de 31 la diferencia es menor de 3 m (mediana 1.1 m). La guía de campo de Xcaret (P. Blanchon) confirma que los círculos numerados son los afloramientos visitados en cada parada y que las líneas gruesas son solo las líneas de proyección de los cortes. Se asigna ±10 m por el dibujo de los símbolos. <b>XA4</b> (fechada) difiere 93 m entre las dos figuras; XD3, 44 m, y XD6, 19 m: están marcadas y su posición alternativa puede activarse arriba.</p>
+    <p class="ref"><b>Sección vertical</b>: el botón del popup abre el panel correspondiente de la Fig. 6 de Blanchon (2010), con la columna resaltada y las muestras fechadas a su elevación (escala calibrada, 1 px ≈ 2 cm). El panel D-E rotula dos secciones como «E3»; la del extremo costero probablemente es D3 (aquí, E3*).</p>
+
+    <h2>Referencias</h2>
+    <p class="ref">Blanchon P. (2010). Reef demise and back-stepping during the last interglacial, northeast Yucatan. <i>Coral Reefs</i> 29:481–498. <a href="https://doi.org/10.1007/s00338-010-0599-0">doi:10.1007/s00338-010-0599-0</a></p>
+    <p class="ref">Blanchon P., Eisenhauer A., Fietzke J., Liebetrau V. (2009). Rapid sea-level rise and reef back-stepping at the close of the last interglacial highstand. <i>Nature</i> 458:881–884. <a href="https://doi.org/10.1038/nature07933">doi:10.1038/nature07933</a></p>
+    <p class="ref"><a href="data/xcaret.geojson">Descargar datos (GeoJSON)</a></p>
+  </aside>
+  <div id="map"></div>
+</div>
+<script>
+const D = GEO.xcaret, F6 = GEO.xcaretFig6;
+const PANEL = { AB:"XA-B", C:"XC", DE:"XD-E" };
+const map = GP.map("map", null, null, GEO.xcaretBase);
+const grp = L.layerGroup().addTo(map), alt = L.layerGroup();
+
+const isU = a => a.fiabilidad !== "confiable (r)";
+function color(p){ return p.edad_med_conf!==null ? GP.viridis(p.edad_med_conf,115,135) : (p.n_edades ? "#6b7682" : "#d4dade"); }
+
+function popup(p){
+  const f=GP.fmt, e=GP.esc;
+  let h = '<div class="pop-title">' + e(p.seccion_pub) + (p.etiqueta_fig6 ? ' <span style="font-weight:400;color:#5d6b7a">(Fig. 6: ' + e(p.etiqueta_fig6) + ')</span>' : '') + '</div><table class="pop">' +
+    '<tr><td>Transecto</td><td>' + e(p.transecto) + '</td></tr>' +
+    '<tr><td>Posición</td><td>± ' + f(p.incert_pos_m,0) + ' m · calidad ' + e(p.coord_calidad) + '</td></tr>' +
+    (p.n_conf ? '<tr><td>Edad (confiables)</td><td><b>' + f(p.edad_min_conf,1) + (p.n_conf>1 ? '–' + f(p.edad_max_conf,1) : '') + ' ka</b> (n = ' + p.n_conf + ')</td></tr>' : '') +
+    '</table>';
+  if (p.dif_fig5_m!==null && p.dif_fig5_m>=10) h += '<div class="warn">La Fig. 5 de Blanchon (2010) sitúa esta sección ' + f(p.dif_fig5_m,0) + ' m más lejos. Pendiente de confirmar con P. Blanchon.</div>';
+  if (p.edades && p.edades.length) {
+    h += '<table class="ages"><tr><th>Muestra</th><th>Elev. (m)</th><th>Edad ± 2σ (ka)</th><th>δ²³⁴Uᵢ</th><th></th></tr>' +
+      p.edades.map(a => '<tr class="' + (isU(a)?'u':'') + '"><td>' + e(a.muestra) + ' <span title="especie">' + e(a.especie_cod) + '</span></td><td>+' + f(a.elev_m,1) + '</td><td>' + f(a.edad_ka,1) + ' ± ' + f(a.err_ka,1) + '</td><td>' + f(a.d234U_ini,0) + '</td><td>' + (a.fiabilidad==='confiable (r)'?'r':(a.fiabilidad==='sin dato'?'–':'u')) + (a.nota_fiab?' ('+e(a.nota_fiab)+')':'') + '</td></tr>').join('') + '</table>';
+  } else h += '<div class="nolog">Sin edades U-Th.</div>';
+  if (p.panel_fig6) h += '<div class="logbtn" data-sec="' + e(p.seccion) + '"><img src="' + F6[p.panel_fig6].src + '" alt="" style="height:40px"><span>Ver sección vertical ' + PANEL[p.panel_fig6] + ' (Fig. 6) →</span></div>';
+  else h += '<div class="nolog">Esta sección no aparece en la Fig. 6.</div>';
+  return h;
+}
+
+function openPanel(p){
+  const c = F6[p.panel_fig6];
+  let lb = document.getElementById("lbx");
+  if (!lb) {
+    lb = document.createElement("div"); lb.id="lbx"; lb.className="lb lbx";
+    lb.innerHTML = '<div class="box"><button class="close" aria-label="Cerrar">×</button><div class="ttl" style="font-weight:600;margin:0 24px 6px 0"></div><div class="imgwrap"><div class="pnl"><img alt="Sección vertical"></div></div><div class="cap" style="max-width:760px"></div></div>';
+    document.body.appendChild(lb);
+    lb.addEventListener("click", ev => { if (ev.target===lb || ev.target.classList.contains("close")) lb.classList.remove("on"); });
+    document.addEventListener("keydown", ev => { if (ev.key==="Escape") lb.classList.remove("on"); });
+  }
+  const wrap = lb.querySelector(".imgwrap"), pnl = lb.querySelector(".pnl"), img = pnl.querySelector("img");
+  pnl.querySelectorAll(".band6,.dot6").forEach(n=>n.remove());
+  lb.querySelector(".ttl").textContent = "Sección " + p.seccion_pub + " en el transecto " + PANEL[p.panel_fig6] + " · Xcaret";
+  lb.querySelector(".cap").innerHTML = "Panel " + PANEL[p.panel_fig6] + " de la Fig. 6 de Blanchon (2010), rotado para que la elevación quede en vertical (escala a la derecha, en m sobre el nivel del mar actual; mar a la derecha). La banda azul marca la columna " + GP.esc(p.etiqueta_fig6) + ". Puntos: muestras fechadas a su elevación (rojo, confiables, con su edad; gris, no confiables: pasa el cursor para ver la edad). Edades de Blanchon et al. (2009). Clic en la imagen para ampliarla o reducirla.";
+  wrap.classList.remove("z");
+  img.onclick = () => { wrap.classList.toggle("z"); img.onload(); };
+  img.onload = () => {
+    pnl.querySelectorAll(".band6,.dot6").forEach(n=>n.remove());
+    const k = img.clientHeight / img.naturalHeight, x = (p.col_fig6_px - c.x0) * c.k * k;
+    const b = document.createElement("div"); b.className="band6"; b.style.left = x+"px"; pnl.appendChild(b);
+    const seen = {};
+    (p.edades||[]).forEach(a => {
+      const key = a.elev_m + (isU(a)?"u":"r"); const n = (seen[key] = (seen[key]||0) + 1);
+      const d = document.createElement("div"); d.className = "dot6" + (isU(a)?" u":"");
+      d.style.left = x+"px"; d.style.top = (c.sl - a.elev_m * c.pxm) * k + "px";
+      if (n===1) { const grpA = p.edades.filter(q => q.elev_m===a.elev_m && isU(q)===isU(a));
+        const txt = grpA.map(q=>GP.fmt(q.edad_ka,1)).join(" · ") + " ka";
+        if (isU(a)) d.title = "No confiables (+" + GP.fmt(a.elev_m,1) + " m): " + txt; else d.innerHTML = "<span>" + txt + "</span>";
+        pnl.appendChild(d); }
+    });
+    wrap.scrollLeft = Math.max(0, x - wrap.clientWidth/2);
+  };
+  img.src = c.src; if (img.complete && img.naturalHeight) img.onload();
+  lb.classList.add("on");
+}
+document.addEventListener("click", ev => {
+  const b = ev.target.closest(".logbtn"); if (!b) return;
+  const f = D.features.find(q => q.properties.seccion===b.dataset.sec); if (f) openPanel(f.properties);
+});
+
+const markers = D.features.map(f => {
+  const [lon,lat]=f.geometry.coordinates, p=f.properties, big = p.n_edades>0;
+  const m = L.marker([lat,lon], { icon:GP.svgIcon("circle", color(p), big?18:12), zIndexOffset: big?1000:0 });
+  m.bindPopup(popup(p), { maxWidth:360 });
+  m.bindTooltip(GP.esc(p.seccion_pub) + (p.n_conf ? " · " + GP.fmt(p.edad_med_conf,1) + " ka" : ""), { direction:"top", offset:[0,-8] });
+  if (p.lon_fig5!==null && p.dif_fig5_m>=10) {
+    L.polyline([[lat,lon],[p.lat_fig5,p.lon_fig5]], { color:"#fff", weight:1.5, dashArray:"4 4" }).addTo(alt);
+    L.marker([p.lat_fig5,p.lon_fig5], { icon:GP.svgIcon("circle","transparent",14) })
+      .bindTooltip(GP.esc(p.seccion_pub) + " según Fig. 5 (" + GP.fmt(p.dif_fig5_m,0) + " m)", { direction:"top" }).addTo(alt);
+  }
+  m._p=p; return m;
+});
+const tr = L.layerGroup().addTo(map);
+GEO.xcaretTransectos.features.forEach(f => L.polyline(f.geometry.coordinates.map(c=>[c[1],c[0]]), { color:"#ffffff", weight:2, opacity:.85 })
+  .bindTooltip("Transecto " + f.properties.transecto, { sticky:true }).addTo(tr));
+document.getElementById("trOn").addEventListener("change", e => e.target.checked ? tr.addTo(map) : map.removeLayer(tr));
+document.getElementById("altOn").addEventListener("change", e => e.target.checked ? alt.addTo(map) : map.removeLayer(alt));
+document.getElementById("total").textContent = markers.length;
+function apply(){
+  const solo = document.getElementById("soloF").checked;
+  grp.clearLayers(); const vis = markers.filter(m => !solo || m._p.n_edades>0); vis.forEach(m=>grp.addLayer(m));
+  document.getElementById("count").textContent = vis.length;
+}
+document.getElementById("soloF").addEventListener("change", apply);
+apply(); map.fitBounds(L.featureGroup(markers).getBounds(), { padding:[40,40] });
+</script>
+</body>
+</html>
